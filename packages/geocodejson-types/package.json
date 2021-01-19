@@ -1,0 +1,15 @@
+{
+  "name": "@p-j/geocodejson-types",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "peerDependencies": {
+    "geojson": "*"
+  },
+  "dependencies": {
+    "@types/geojson": "^7946.0.7"
+  },
+  "scripts": {
+    "build": "rimraf ./dist && tsc"
+  }
+}

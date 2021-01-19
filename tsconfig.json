@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "outDir": "./dist",
     "declaration": true,
     "preserveSymlinks": true,
     "target": "esnext",
@@ -12,7 +13,7 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    // "noUnusedParameters": true,
     "preserveConstEnums": true,
     "sourceMap": true,
     "strict": true,
