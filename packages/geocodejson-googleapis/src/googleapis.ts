@@ -6,26 +6,21 @@ import { featureCollection, point } from '@turf/helpers'
 import fetch from 'cross-fetch'
 import { BBox, Position } from 'geojson'
 
-// TODO: make a proper global
-declare const GOOGLE_API_KEY: string
-const DEFAULT_OPTIONS = {
-  language: 'en',
-  sensor: false,
-  short: false,
-}
-
-export type GoogleGeocoderResponse = {
-  results: google.maps.GeocoderResult[]
-  status: google.maps.GeocoderStatus
+export interface GeocoderResponse extends google.maps.GeocoderResponse {
   query?: string
 }
-export async function geocode(
-  address: string,
-  googleGeocodeOptions: Pick<google.maps.GeocoderRequest, 'bounds' | 'componentRestrictions' | 'region'> = {},
-): Promise<GoogleGeocoderResponse> {
-  const { bounds: b, componentRestrictions = {}, region } = googleGeocodeOptions
 
-  const bounds = b && [[b.northeast.lat, b.northeast.lng].join(), [b.southwest.lat, b.southwest.lng].join()].join('|')
+export async function geocode(
+  { apiKey, address, language = 'en' }: { apiKey: string; address: string; language: string },
+  {
+    bounds,
+    componentRestrictions = {},
+    region,
+  }: Pick<google.maps.GeocoderRequest, 'bounds' | 'componentRestrictions' | 'region'> = {},
+): Promise<GeocoderResponse> {
+  const boundsArg =
+    bounds &&
+    [[bounds.northeast.lat, bounds.northeast.lng].join(), [bounds.southwest.lat, bounds.southwest.lng].join()].join('|')
 
   const components = Object.entries(componentRestrictions)
     .map(([key, value]) => [`${key}:${value}`])
@@ -35,9 +30,10 @@ export async function geocode(
     Object.assign(
       {
         address,
-        key: GOOGLE_API_KEY,
+        key: apiKey,
       },
-      bounds && { bounds },
+      language,
+      bounds && { bounds: boundsArg },
       region && { region },
       components && { components },
     ),
@@ -51,9 +47,8 @@ export async function geocode(
 /**
  * Convert Google results into GeoJSON
  */
-export function parse(response: GoogleGeocoderResponse, options = DEFAULT_OPTIONS): GeocodeResponse {
+export function parse(response: GeocoderResponse, { short = false }: { short?: boolean } = {}): GeocodeResponse {
   const { results, query } = response
-  const short = options.short || DEFAULT_OPTIONS.short
   const geocodeResults = results.map((result) => parseResult(result, { short }))
 
   return Object.assign(
@@ -72,7 +67,7 @@ export function parse(response: GoogleGeocoderResponse, options = DEFAULT_OPTION
 /**
  * Turn a Google Geocode result into a GeocodeJSON result
  */
-function parseResult(result: google.maps.GeocoderResult, { short }: { short: boolean }): GeocodeResult {
+function parseResult(result: google.maps.GeocoderResult, { short = false }: { short?: boolean } = {}): GeocodeResult {
   // Google <-> GeocodeJSON Mapping
   const {
     street_number: housenumber,
@@ -84,7 +79,7 @@ function parseResult(result: google.maps.GeocoderResult, { short }: { short: boo
     administrative_area_level_2: county,
     administrative_area_level_1: state,
     country,
-  } = parseAddressComponents(result.address_components, short)
+  } = parseAddressComponents(result.address_components, { short })
 
   const [lng, lat] = parsePointCoordinates(result)
   const properties = {
@@ -111,7 +106,10 @@ function parseResult(result: google.maps.GeocoderResult, { short }: { short: boo
 /**
  * Parses Address Component into a single layer Object
  */
-function parseAddressComponents(components: google.maps.GeocoderAddressComponent[], short = DEFAULT_OPTIONS.short) {
+function parseAddressComponents(
+  components: google.maps.GeocoderAddressComponent[],
+  { short = false }: { short?: boolean } = {},
+) {
   const results: Record<string, string> = {}
   components.map((component) => {
     if (short) {

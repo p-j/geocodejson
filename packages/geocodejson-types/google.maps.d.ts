@@ -34,6 +34,15 @@ declare namespace google.maps {
     southwest: LatLng
   }
 
+  /**
+   * The Google Geocoding API Response Interface
+   */
+
+  interface GeocoderResponse {
+    results: GeocoderResult[]
+    status: GeocoderStatus
+  }
+
   enum AddressTypes {
     street_address = 'street_address', // indicates a precise street address.
     route = 'route', // indicates a named route (such as "US 101").
