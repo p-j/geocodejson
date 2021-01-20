@@ -1,0 +1,30 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    # TODO: change upon setting up a new project
+    # disable release action on forks
+    if: github.repository == 'p-j/typescript-monorepo-template'
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 15
+      - run: yarn --pure-lockfile
+      - uses: changesets/action@master
+        with:
+          publish: yarn release
+          commit: 'chore(release): publish'
+          title: Publish next versions
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
