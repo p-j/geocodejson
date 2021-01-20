@@ -1,13 +1,8 @@
 import { Feature, FeatureCollection, Point } from 'geojson'
 
-export enum GeocodeType {
-  house = 'house',
-  street = 'street',
-  locality = 'locality',
-  city = 'city',
-  region = 'region',
-  country = 'country',
-}
+export as namespace GeocodeJSON
+
+export type GeocodeType = 'house' | 'street' | 'locality' | 'city' | 'region' | 'country' | string
 
 export interface GeocodeResponse extends FeatureCollection {
   // REQUIRED. GeocodeJSON result is a FeatureCollection.
@@ -35,13 +30,13 @@ export interface GeocodeResponse extends FeatureCollection {
   features: GeocodeResult[]
 }
 
-export interface GeocodeResult extends Feature {
+interface GeocodeResult extends Feature {
   // REQUIRED. As per GeoJSON spec.
   properties: {
     // REQUIRED. Namespace.
     geocoding: {
       // REQUIRED. One of "house", "street", "locality", "city", "region", "country" or else...
-      type: GeocodeType | string
+      type: GeocodeType
 
       // OPTIONAL. Result accuracy, in meters.
       accuracy?: number

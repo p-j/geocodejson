@@ -1,7 +1,8 @@
 {
   "name": "@p-j/geocodejson-types",
   "version": "0.0.0",
-  "main": "dist/index.js",
+  "main": "",
+  "types": "index",
   "license": "MIT",
   "peerDependencies": {
     "geojson": "*"

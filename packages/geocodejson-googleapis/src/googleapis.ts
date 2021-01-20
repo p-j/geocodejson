@@ -1,8 +1,10 @@
+/// <reference types="@p-j/geocodejson-types/google.maps" />
+
 import * as geohash from 'ngeohash'
 import { GeocodeType, GeocodeResponse, GeocodeResult } from '@p-j/geocodejson-types'
 import { featureCollection, point } from '@turf/helpers'
-import { BBox2d, Position } from '@turf/helpers/dist/js/lib/geojson'
 import fetch from 'cross-fetch'
+import { BBox, Position } from 'geojson'
 
 // TODO: make a proper global
 declare const GOOGLE_API_KEY: string
@@ -15,7 +17,7 @@ const DEFAULT_OPTIONS = {
 export async function geocode(
   address: string,
   // TODO: handle options
-  googleGeocodeOptions?: google.maps.GeocoderRequest,
+  // googleGeocodeOptions?: google.maps.GeocoderRequest,
 ): Promise<{ results: google.maps.GeocoderResult; status: google.maps.GeocoderStatus }> {
   const searchParams = new URLSearchParams({ address, key: GOOGLE_API_KEY })
   const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?${searchParams}`, { method: 'GET' })
@@ -100,7 +102,7 @@ function parseAddressComponents(components: google.maps.GeocoderAddressComponent
 /**
  * Extract a BBox from a GeocoderResult
  */
-function parseBBox(result: google.maps.GeocoderResult): BBox2d {
+function parseBBox(result: google.maps.GeocoderResult): BBox {
   return [
     result.geometry.viewport.southwest.lng,
     result.geometry.viewport.southwest.lat,
@@ -119,31 +121,31 @@ function parsePointCoordinates(result: google.maps.GeocoderResult): Position {
 /**
  * Extract GeocodeJSON type from a GeocoderResult
  */
-function parseType(result: google.maps.GeocoderResult) {
+function parseType(result: google.maps.GeocoderResult): GeocodeType | string {
   const types = result.types.map((type) => {
     switch (type as google.maps.AddressTypes | google.maps.AddressComponentTypes) {
       case 'street_number':
       case 'street_address':
-        return GeocodeType.house
+        return 'house'
 
       case 'route':
       case 'intersection':
-        return GeocodeType.street
+        return 'street'
 
       case 'neighborhood':
       case 'colloquial_area':
       case 'sublocality':
-        return GeocodeType.locality
+        return 'locality'
 
       case 'locality':
-        return GeocodeType.city
+        return 'city'
 
       case 'administrative_area_level_1':
       case 'administrative_area_level_2':
-        return GeocodeType.region
+        return 'region'
 
       case 'country':
-        return GeocodeType.country
+        return 'country'
 
       default:
         return type
@@ -151,12 +153,12 @@ function parseType(result: google.maps.GeocoderResult) {
   })
 
   // By order of priority
-  if (types.some((type) => type === GeocodeType.house)) return GeocodeType.house
-  if (types.some((type) => type === GeocodeType.street)) return GeocodeType.street
-  if (types.some((type) => type === GeocodeType.locality)) return GeocodeType.locality
-  if (types.some((type) => type === GeocodeType.city)) return GeocodeType.city
-  if (types.some((type) => type === GeocodeType.region)) return GeocodeType.region
-  if (types.some((type) => type === GeocodeType.country)) return GeocodeType.country
+  if (types.some((type) => type === 'house')) return 'house'
+  if (types.some((type) => type === 'street')) return 'street'
+  if (types.some((type) => type === 'locality')) return 'locality'
+  if (types.some((type) => type === 'city')) return 'city'
+  if (types.some((type) => type === 'region')) return 'region'
+  if (types.some((type) => type === 'country')) return 'country'
   return types[0] || 'unknown'
 }
 

@@ -270,7 +270,7 @@ declare namespace google.maps {
      * of the requested address.
      * @see {@link https://developers.google.com/maps/documentation/javascript/reference/geocoder#GeocoderResult.partial_match Maps JavaScript API}
      */
-    partial_match: boolean
+    partial_match?: boolean
 
     /**
      * The place ID associated with the location. Place IDs uniquely identify a place in the Google Places database
@@ -285,7 +285,7 @@ declare namespace google.maps {
      * result is a postal code that contains multiple localities. This array can contain up to 10 localities.
      * @see {@link https://developers.google.com/maps/documentation/javascript/reference/geocoder#GeocoderResult.postcode_localities Maps JavaScript API}
      */
-    postcode_localities: string[]
+    postcode_localities?: string[]
 
     /**
      * An array of strings denoting the type of the returned geocoded element. For a list of possible strings, refer
@@ -332,7 +332,7 @@ declare namespace google.maps {
      * The precise bounds of this {@link GeocoderResult}, if applicable
      * @see {@link https://developers.google.com/maps/documentation/javascript/reference/geocoder#GeocoderGeometry.bounds Maps JavaScript API}
      */
-    bounds: LatLngBounds
+    bounds?: LatLngBounds
 
     /**
      * The latitude/longitude coordinates of this result

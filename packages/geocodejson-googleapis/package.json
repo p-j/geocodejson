@@ -5,18 +5,12 @@
   "author": "Jérémie Parker <hi@pkr.sh>",
   "homepage": "https://github.com/p-j/geocodejson#readme",
   "license": "MIT",
-  "main": "dist/googleapis.js",
-  "types": "dist/googleapis.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/p-j/geocodejson.git"
   },
-  "jest": {
-    "preset": "ts-jest",
-    "setupFiles": [
-      "../../jest.setup.ts"
-    ]
-  },
+  "main": "dist/googleapis.js",
+  "types": "dist/googleapis.d.ts",
   "dependencies": {
     "@turf/helpers": "^6.3.0",
     "cross-fetch": "^3.0.6",
@@ -30,7 +24,7 @@
     "@types/ngeohash": "^0.6.2"
   },
   "scripts": {
-    "build": "rimraf ./dist && tsc",
+    "build": "rimraf ./dist && tsc -b ./tsconfig.build.json",
     "test": "jest"
   }
 }
