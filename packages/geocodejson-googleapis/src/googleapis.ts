@@ -14,21 +14,45 @@ const DEFAULT_OPTIONS = {
   short: false,
 }
 
+export type GoogleGeocoderResponse = {
+  results: google.maps.GeocoderResult[]
+  status: google.maps.GeocoderStatus
+  query?: string
+}
 export async function geocode(
   address: string,
-  // TODO: handle options
-  // googleGeocodeOptions?: google.maps.GeocoderRequest,
-): Promise<{ results: google.maps.GeocoderResult; status: google.maps.GeocoderStatus }> {
-  const searchParams = new URLSearchParams({ address, key: GOOGLE_API_KEY })
+  googleGeocodeOptions: Pick<google.maps.GeocoderRequest, 'bounds' | 'componentRestrictions' | 'region'> = {},
+): Promise<GoogleGeocoderResponse> {
+  const { bounds: b, componentRestrictions = {}, region } = googleGeocodeOptions
+
+  const bounds = b && [[b.northeast.lat, b.northeast.lng].join(), [b.southwest.lat, b.southwest.lng].join()].join('|')
+
+  const components = Object.entries(componentRestrictions)
+    .map(([key, value]) => [`${key}:${value}`])
+    .join('|')
+
+  const searchParams = new URLSearchParams(
+    Object.assign(
+      {
+        address,
+        key: GOOGLE_API_KEY,
+      },
+      bounds && { bounds },
+      region && { region },
+      components && { components },
+    ),
+  )
+
   const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?${searchParams}`, { method: 'GET' })
   const json = await response.json()
-  return json
+  return Object.assign(json, { query: address })
 }
 
 /**
  * Convert Google results into GeoJSON
  */
-export function parse(results: google.maps.GeocoderResult[], options = DEFAULT_OPTIONS): GeocodeResponse {
+export function parse(response: GoogleGeocoderResponse, options = DEFAULT_OPTIONS): GeocodeResponse {
+  const { results, query } = response
   const short = options.short || DEFAULT_OPTIONS.short
   const geocodeResults = results.map((result) => parseResult(result, { short }))
 
@@ -38,7 +62,7 @@ export function parse(results: google.maps.GeocoderResult[], options = DEFAULT_O
         version: '0.1.0',
         licence: null,
         attribution: 'Google Geocoding API',
-        query: null,
+        query: query || null,
       },
     },
     featureCollection(geocodeResults),
@@ -124,6 +148,7 @@ function parsePointCoordinates(result: google.maps.GeocoderResult): Position {
 function parseType(result: google.maps.GeocoderResult): GeocodeType | string {
   const types = result.types.map((type) => {
     switch (type as google.maps.AddressTypes | google.maps.AddressComponentTypes) {
+      case 'premise':
       case 'street_number':
       case 'street_address':
         return 'house'
