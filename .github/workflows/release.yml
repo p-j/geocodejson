@@ -7,7 +7,6 @@ on:
 
 jobs:
   release:
-    # TODO: change upon setting up a new project
     # disable release action on forks
     if: github.repository == 'p-j/geocodejson'
 
