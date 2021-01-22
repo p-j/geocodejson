@@ -1,7 +1,6 @@
 {
   "name": "@p-j/geocodejson-googleapis",
   "version": "0.0.0",
-  "description": "> TODO: description",
   "author": "Jérémie Parker <hi@pkr.sh>",
   "homepage": "https://github.com/p-j/geocodejson#readme",
   "license": "MIT",
