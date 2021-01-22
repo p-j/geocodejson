@@ -1,4 +1,6 @@
 # Typescript Monorepo Template
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fp-j%2Fgeocodejson.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fp-j%2Fgeocodejson?ref=badge_shield)
+
 
 This template is intended for OSS Typescript based projects and is centered around a few tools:
 
@@ -20,3 +22,7 @@ This template is intended for OSS Typescript based projects and is centered arou
 - `CODE_OF_CONDUCT.md`: change the contact address in the `Enforcement` paragraph
 - `.github/workflows/release.yml`: change the guard to your repository name
 - `.changeset/config.json`: change the repository name
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fp-j%2Fgeocodejson.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fp-j%2Fgeocodejson?ref=badge_large)
