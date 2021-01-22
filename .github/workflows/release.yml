@@ -9,7 +9,7 @@ jobs:
   release:
     # TODO: change upon setting up a new project
     # disable release action on forks
-    if: github.repository == 'p-j/typescript-monorepo-template'
+    if: github.repository == 'p-j/geocodejson'
 
     runs-on: ubuntu-latest
     steps:
