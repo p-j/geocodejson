@@ -1,28 +1,49 @@
-# Typescript Monorepo Template
+# GeocodeJSON
+
+> GeocodeJSON packages are a collection of small utility to work with geocoding API such as _Google Geocoding API_, _HERE Geocoding API_, _Opencage_, etc... As well as self hosted solution like [Mimirsbrunn](https://github.com/CanalTP/mimirsbrunn).
+> These packages provide a simple inteface for geocoding addresses exposing the underlying APIs filtering capabilities while returning all response in a standard format: [GeocodeJSON](https://github.com/geocoders/geocodejson-spec/tree/master/draft),
+> a [GeoJSON](https://tools.ietf.org/html/rfc7946) extension.
+> These packages leverage [`cross-fetch`](https://github.com/lquixada/cross-fetch) to work on both backend & frontend
+
+[![lerna](https://img.shields.io/badge/build%20with-lerna-cc00ff?style=flat-square)](https://lerna.js.org/)
+[![lerna](https://img.shields.io/badge/released%20with-changeset-blue?style=flat-square)](https://github.com/atlassian/changesets/)
+[![codecov](https://img.shields.io/codecov/c/github/p-j/geocodejson?style=flat-square)](https://codecov.io/gh/p-j/geocodejson)
+[![Build Status](https://img.shields.io/github/workflow/status/p-j/geocodejson/Build?style=flat-square)](https://github.com/p-j/geocodejson/actions?query=workflow%3ABuild)
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fp-j%2Fgeocodejson.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fp-j%2Fgeocodejson?ref=badge_shield)
 
+## GeocodeJSON packages
 
-This template is intended for OSS Typescript based projects and is centered around a few tools:
+| Package                                                            | Description                                                | Version                                                                                                                                         | Changelog                                                                                                                                  |
+| ------------------------------------------------------------------ | ---------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| [`@p-j/geocodejson-googleapis`](./packages/geocodejson-googleapis) | Geocode & format to GeocodeJSON using Google Geocoding API | [![version](https://img.shields.io/npm/v/@p-j/geocodejson-googleapis?style=flat-square)](https://npmjs.com/package/@p-j/geocodejson-googleapis) | [![changelog](https://img.shields.io/badge/changelog-%2B-lightgrey?style=flat-square)](https://changelogs.xyz/@p-j/geocodejson-googleapis) |
+| [`@p-j/geocodejson-here`](./)                                      | _Coming soon_                                              |                                                                                                                                                 |                                                                                                                                            |
+| [`@p-j/geocodejson-opencage`](./)                                  | _Coming soon_                                              |                                                                                                                                                 |                                                                                                                                            |
+| [`@p-j/geocodejson-mimirsbrunn`](./)                               | _Coming soon_                                              |                                                                                                                                                 |                                                                                                                                            |
+| [`@p-j/geocodejson-types`](./packages/geocodejson-types)           | Type definitions for GeocodeJSON packages                  | [![version](https://img.shields.io/npm/v/@p-j/geocodejson-types?style=flat-square)](https://npmjs.com/package/@p-j/geocodejson-types)           | [![changelog](https://img.shields.io/badge/changelog-%2B-lightgrey?style=flat-square)](https://changelogs.xyz/@p-j/geocodejson-types)      |
 
-- **yarn** for dependency management and running tasks like `test` or `publish`
-- **lerna** for running package level commands
-- **changeset** for managing changelog generation, and release creation
+## Usage
 
-## How to use this template
+Each provider package export 2 main functions:
 
-- Get started by clicking [Use this template](https://github.com/p-j/typescript-monorepo-template/generate)
-- Update the required files as [described below](https://github.com/p-j/typescript-monorepo-template#what-you-need-to-change)
-- Use `yarn` for dependencies as this template make use of [Yarn Workspaces](https://classic.yarnpkg.com/en/docs/workspaces/)
-- Browse the scripts to understand how `lerna` `changeset` and `yarn` play together to `build` `test` and `publish` releases.
+- `geocode`: call the API with your input and options and get the raw response from the API
+- `parse`: parse the rew response from the API and returned a properly formatted GeocodeJSON response equivalent
 
-## What you need to change
+Refer to each packages README for a list of options linked to the underlying API capabilities.
 
-- `package.json`: change project name, author etc...
-- `LICENSE`: change the copyright holder
-- `CODE_OF_CONDUCT.md`: change the contact address in the `Enforcement` paragraph
-- `.github/workflows/release.yml`: change the guard to your repository name
-- `.changeset/config.json`: change the repository name
+## Roadmap
 
+_aka: TODO_
+
+- Implement more providers (Here, Opencage & Mimirsbrunn are top priorities)
+- Define a unified format for options for all suppoerted providers (eg: filtering, biasing, language etc...)
+- Add reverse geocoding
+- Add autocomplete
+- Add feature details endpoint (aka: place details)
+
+## Inpiration
+
+This package was inspired by the [`geocodejson-spec`](https://github.com/geocoders/geocodejson-spec/tree/master/draft), [`geocoder-geojson`](https://github.com/DenisCarriere/geocoder-geojson#readme), [`geo-coder`](https://github.com/allenhwkim/geo-coder)
 
 ## License
+
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fp-j%2Fgeocodejson.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fp-j%2Fgeocodejson?ref=badge_large)
