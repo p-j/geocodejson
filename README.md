@@ -1,8 +1,10 @@
 # GeocodeJSON
 
 > GeocodeJSON packages are a collection of small utility to work with geocoding API such as _Google Geocoding API_, _HERE Geocoding API_, _Opencage_, etc... As well as self hosted solution like [Mimirsbrunn](https://github.com/CanalTP/mimirsbrunn).
+>
 > These packages provide a simple inteface for geocoding addresses exposing the underlying APIs filtering capabilities while returning all response in a standard format: [GeocodeJSON](https://github.com/geocoders/geocodejson-spec/tree/master/draft),
 > a [GeoJSON](https://tools.ietf.org/html/rfc7946) extension.
+>
 > These packages leverage [`cross-fetch`](https://github.com/lquixada/cross-fetch) to work on both backend & frontend
 
 [![lerna](https://img.shields.io/badge/build%20with-lerna-cc00ff?style=flat-square)](https://lerna.js.org/)
@@ -42,7 +44,19 @@ _aka: TODO_
 
 ## Inpiration
 
-This package was inspired by the [`geocodejson-spec`](https://github.com/geocoders/geocodejson-spec/tree/master/draft), [`geocoder-geojson`](https://github.com/DenisCarriere/geocoder-geojson#readme), [`geo-coder`](https://github.com/allenhwkim/geo-coder)
+This package was inspired by the [`geocodejson-spec`](https://github.com/geocoders/geocodejson-spec/tree/master/draft), [`geocoder-geojson`](https://github.com/DenisCarriere/geocoder-geojson#readme), [`geo-coder`](https://github.com/allenhwkim/geo-coder) and [`node-geocoder`](https://github.com/nchaulet/node-geocoder)
+
+## Why another geocoder then?
+
+The list or prerequisite for this project was as follow:
+
+- Work as closely as possible with standard format (GeoJSON / GeocodeJSON) for interoperability and compatibility with other tools
+- Make it extensible, avoid packaging everything in one big package
+- Make it composable, expose raw output from geocoding API to allow manipulation, data extraction or caching
+- Make it fully typed to help with coding & documentation
+- Make it isomorphic: usable in the browser, on the server or in environment like Cloudflare Workers
+
+None of the projects I've found allowed for all those options, and none had an easy way of being built upon to propose the same added value, so here we are.
 
 ## License
 
