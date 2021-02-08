@@ -18,8 +18,8 @@
   },
   "devDependencies": {
     "@p-j/geocodejson-types": "*",
-    "@types/jest": "^26.0.20",
-    "@types/ngeohash": "^0.6.2"
+    "@types/jest": "26.0.20",
+    "@types/ngeohash": "0.6.2"
   },
   "scripts": {
     "build": "rimraf ./dist && tsc -b ./tsconfig.build.json",
