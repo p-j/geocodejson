@@ -5,7 +5,6 @@
     "target": "esnext",
     "module": "commonjs",
     "lib": ["ESNext"],
-    "types": ["jest", "@p-j/geocodejson-types"],
     "moduleResolution": "node",
     "alwaysStrict": true,
     "noImplicitAny": true,
@@ -21,5 +20,4 @@
     "strictNullChecks": true,
     "strictPropertyInitialization": true
   },
-  "exclude": ["node_modules", "dist"]
 }
