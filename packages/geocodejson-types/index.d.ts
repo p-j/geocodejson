@@ -48,7 +48,7 @@ interface GeocodeResult extends Feature {
       name?: string
 
       // OPTIONAL. Housenumber of the place.
-      housenumber?: number | string
+      housenumber?: string
 
       // OPTIONAL. Street of the place.
       street?: string
