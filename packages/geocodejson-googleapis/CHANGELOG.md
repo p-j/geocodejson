@@ -1,5 +1,11 @@
 # @p-j/geocodejson-googleapis
 
+## 2.0.1
+
+### Patch Changes
+
+- [`60c1934`](https://github.com/p-j/geocodejson/commit/60c193428c95412ac6f0b77d92f3a9a20735d96d) Thanks [@p-j](https://github.com/p-j)! - Change @p-j/geocodejson-types version range
+
 ## 2.0.0
 
 ### Major Changes
