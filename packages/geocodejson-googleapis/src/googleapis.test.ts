@@ -14,8 +14,8 @@ describe('geocodejson-googleapis', () => {
       expect(parse(fixtures.defaultResponse as GoogleAPIResponse)).toStrictEqual({
         geocoding: {
           version: '0.1.0',
-          licence: null,
-          attribution: 'Google Geocoding API',
+          licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
+          attribution: 'Powered by Google',
           query: null,
         },
         type: 'FeatureCollection',
@@ -51,8 +51,8 @@ describe('geocodejson-googleapis', () => {
       expect(parse(fixtures.defaultResponse as GoogleAPIResponse, { short: true })).toStrictEqual({
         geocoding: {
           version: '0.1.0',
-          licence: null,
-          attribution: 'Google Geocoding API',
+          licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
+          attribution: 'Powered by Google',
           query: null,
         },
         type: 'FeatureCollection',
@@ -88,8 +88,8 @@ describe('geocodejson-googleapis', () => {
       expect(parse(fixtures.viewportBiasingResponse as GoogleAPIResponse)).toStrictEqual({
         geocoding: {
           version: '0.1.0',
-          licence: null,
-          attribution: 'Google Geocoding API',
+          licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
+          attribution: 'Powered by Google',
           query: null,
         },
         type: 'FeatureCollection',
@@ -125,8 +125,8 @@ describe('geocodejson-googleapis', () => {
       expect(parse(fixtures.regionBiasingResponse as GoogleAPIResponse)).toStrictEqual({
         geocoding: {
           version: '0.1.0',
-          licence: null,
-          attribution: 'Google Geocoding API',
+          licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
+          attribution: 'Powered by Google',
           query: null,
         },
         type: 'FeatureCollection',
@@ -162,8 +162,8 @@ describe('geocodejson-googleapis', () => {
       expect(parse(fixtures.componentFilteringResponse as GoogleAPIResponse)).toStrictEqual({
         geocoding: {
           version: '0.1.0',
-          licence: null,
-          attribution: 'Google Geocoding API',
+          licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
+          attribution: 'Powered by Google',
           query: null,
         },
         type: 'FeatureCollection',
@@ -199,8 +199,8 @@ describe('geocodejson-googleapis', () => {
       expect(parse(fixtures.zeroResultResponse as GoogleAPIResponse)).toStrictEqual({
         geocoding: {
           version: '0.1.0',
-          licence: null,
-          attribution: 'Google Geocoding API',
+          licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
+          attribution: 'Powered by Google',
           query: null,
         },
         type: 'FeatureCollection',
@@ -210,8 +210,8 @@ describe('geocodejson-googleapis', () => {
       expect(parse(fixtures.filterOnlyReponse as GoogleAPIResponse)).toStrictEqual({
         geocoding: {
           version: '0.1.0',
-          licence: null,
-          attribution: 'Google Geocoding API',
+          licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
+          attribution: 'Powered by Google',
           query: null,
         },
         type: 'FeatureCollection',
