@@ -42,9 +42,9 @@ export function getFetchArgs({
   apiKey,
   address,
   language = 'en',
-    bounds,
-    componentRestrictions = {},
-    region,
+  bounds,
+  componentRestrictions = {},
+  region,
 }: Pick<google.maps.GeocoderRequest, 'bounds' | 'componentRestrictions' | 'region'> & {
   apiKey: string
   address: string
@@ -82,8 +82,8 @@ export function parse(response: GoogleAPIResponse, { short = false }: { short?: 
     {
       geocoding: {
         version: '0.1.0',
-        licence: null,
-        attribution: 'Google Geocoding API',
+        licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
+        attribution: 'Powered by Google',
         query: query || null,
       },
     },
