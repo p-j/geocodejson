@@ -6,18 +6,50 @@ import { featureCollection, point } from '@turf/helpers'
 import fetch from 'cross-fetch'
 import { BBox, Position } from 'geojson'
 
-export interface GeocoderResponse extends google.maps.GeocoderResponse {
+export interface GoogleAPIResponse extends google.maps.GeocoderResponse {
   query?: string
 }
 
+/**
+ * Geocode an address using Google API and the provided options including optional filter used to bias the search.
+ * @param options.apiKey Google API key
+ * @param options.language Language in which results should preferably be provided
+ * @param options.address The address to geocode
+ * @param filters Optional filters used to bias the search
+ * @see https://developers.google.com/maps/documentation/javascript/reference/geocoder#GeocoderRequest
+ */
 export async function geocode(
-  { apiKey, address, language = 'en' }: { apiKey: string; address: string; language: string },
-  {
-    bounds,
-    componentRestrictions = {},
-    region,
-  }: Pick<google.maps.GeocoderRequest, 'bounds' | 'componentRestrictions' | 'region'> = {},
-): Promise<GeocoderResponse> {
+  { apiKey, address, language = 'en' }: { apiKey: string; address: string; language?: string },
+  filters: Pick<google.maps.GeocoderRequest, 'bounds' | 'componentRestrictions' | 'region'> = {},
+): Promise<GoogleAPIResponse> {
+  const { url, options } = getFetchArgs({ apiKey, address, language, ...filters })
+  const response = await fetch(url, options)
+  const json = await response.json()
+  return Object.assign(json, { query: address })
+}
+
+/**
+ * Generate fetch argument to successfully geocode the address using the provided options
+ * @param options.apiKey Google API Key
+ * @param options.language Language in which results should preferably be provided
+ * @param options.address Address to geocode
+ * @param options.bounds Bounds within which to search.
+ * @param options.componentRestrictions Components are used to restrict results to a specific area. A filter consists of one or more of: route, locality, administrativeArea, postalCode, country. Only the results that match all the filters will be returned. Filter values support the same methods of spelling correction and partial matching as other geocoding requests @see https://developers.google.com/maps/documentation/javascript/reference/geocoder#GeocoderRequest.componentRestrictions
+ * @param options.region Country code used to bias the search, specified as a Unicode region subtag / CLDR identifier.
+ * @see https://developers.google.com/maps/documentation/javascript/reference/geocoder#GeocoderRequest
+ */
+export function getFetchArgs({
+  apiKey,
+  address,
+  language = 'en',
+  bounds,
+  componentRestrictions = {},
+  region,
+}: Pick<google.maps.GeocoderRequest, 'bounds' | 'componentRestrictions' | 'region'> & {
+  apiKey: string
+  address: string
+  language?: string
+}) {
   const boundsArg =
     bounds &&
     [[bounds.northeast.lat, bounds.northeast.lng].join(), [bounds.southwest.lat, bounds.southwest.lng].join()].join('|')
@@ -28,26 +60,21 @@ export async function geocode(
 
   const searchParams = new URLSearchParams(
     Object.assign(
-      {
-        address,
-        key: apiKey,
-      },
-      language,
-      bounds && { bounds: boundsArg },
+      { language, address, key: apiKey },
+      boundsArg && { bounds: boundsArg },
       region && { region },
       components && { components },
     ),
   )
+  searchParams.sort()
 
-  const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?${searchParams}`, { method: 'GET' })
-  const json = await response.json()
-  return Object.assign(json, { query: address })
+  return { url: `https://maps.googleapis.com/maps/api/geocode/json?${searchParams}`, options: { method: 'GET' } }
 }
 
 /**
  * Convert Google results into GeoJSON
  */
-export function parse(response: GeocoderResponse, { short = false }: { short?: boolean } = {}): GeocodeResponse {
+export function parse(response: GoogleAPIResponse, { short = false }: { short?: boolean } = {}): GeocodeResponse {
   const { results, query } = response
   const geocodeResults = results.map((result) => parseResult(result, { short }))
 
@@ -55,8 +82,8 @@ export function parse(response: GeocoderResponse, { short = false }: { short?: b
     {
       geocoding: {
         version: '0.1.0',
-        licence: null,
-        attribution: 'Google Geocoding API',
+        licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
+        attribution: 'Powered by Google',
         query: query || null,
       },
     },
@@ -110,15 +137,10 @@ function parseAddressComponents(
   components: google.maps.GeocoderAddressComponent[],
   { short = false }: { short?: boolean } = {},
 ) {
-  const results: Record<string, string> = {}
-  components.map((component) => {
-    if (short) {
-      results[component.types[0]] = component.short_name
-    } else {
-      results[component.types[0]] = component.long_name
-    }
-  })
-  return results
+  return components.reduce((acc, component) => {
+    acc[component.types[0]] = short ? component.short_name : component.long_name
+    return acc
+  }, {} as Record<string, string>)
 }
 
 /**
@@ -145,7 +167,7 @@ function parsePointCoordinates(result: google.maps.GeocoderResult): Position {
  */
 function parseType(result: google.maps.GeocoderResult): GeocodeType | string {
   const types = result.types.map((type) => {
-    switch (type as google.maps.AddressTypes | google.maps.AddressComponentTypes) {
+    switch (type) {
       case 'premise':
       case 'street_number':
       case 'street_address':
@@ -189,7 +211,7 @@ function parseType(result: google.maps.GeocoderResult): GeocodeType | string {
  * TODO: do some data analysis... Or get rid of it altogether...
  */
 function parseAccuracy(result: google.maps.GeocoderResult): number | undefined {
-  switch (result.geometry.location_type as google.maps.GeocoderLocationType) {
+  switch (result.geometry.location_type) {
     case 'ROOFTOP':
       return 10
     case 'RANGE_INTERPOLATED':

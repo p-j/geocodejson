@@ -1,4 +1,4 @@
-import { parse, geocode, GeocoderResponse } from './googleapis'
+import { parse, geocode, GoogleAPIResponse, getFetchArgs } from './googleapis'
 import * as fixtures from './__fixtures__/googleapis'
 
 // const jsonLog = (obj: Object, name?: string) => console.log(name, JSON.stringify(obj, null, 2))
@@ -11,11 +11,11 @@ describe('geocodejson-googleapis', () => {
 
   describe('parse', () => {
     it('converts google examples correctly', async () => {
-      expect(parse(fixtures.defaultResponse as GeocoderResponse)).toStrictEqual({
+      expect(parse(fixtures.defaultResponse as GoogleAPIResponse)).toStrictEqual({
         geocoding: {
           version: '0.1.0',
-          licence: null,
-          attribution: 'Google Geocoding API',
+          licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
+          attribution: 'Powered by Google',
           query: null,
         },
         type: 'FeatureCollection',
@@ -48,11 +48,11 @@ describe('geocodejson-googleapis', () => {
         ],
       })
 
-      expect(parse(fixtures.defaultResponse as GeocoderResponse, { short: true })).toStrictEqual({
+      expect(parse(fixtures.defaultResponse as GoogleAPIResponse, { short: true })).toStrictEqual({
         geocoding: {
           version: '0.1.0',
-          licence: null,
-          attribution: 'Google Geocoding API',
+          licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
+          attribution: 'Powered by Google',
           query: null,
         },
         type: 'FeatureCollection',
@@ -85,11 +85,11 @@ describe('geocodejson-googleapis', () => {
         ],
       })
 
-      expect(parse(fixtures.viewportBiasingResponse as GeocoderResponse)).toStrictEqual({
+      expect(parse(fixtures.viewportBiasingResponse as GoogleAPIResponse)).toStrictEqual({
         geocoding: {
           version: '0.1.0',
-          licence: null,
-          attribution: 'Google Geocoding API',
+          licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
+          attribution: 'Powered by Google',
           query: null,
         },
         type: 'FeatureCollection',
@@ -122,11 +122,11 @@ describe('geocodejson-googleapis', () => {
         ],
       })
 
-      expect(parse(fixtures.regionBiasingResponse as GeocoderResponse)).toStrictEqual({
+      expect(parse(fixtures.regionBiasingResponse as GoogleAPIResponse)).toStrictEqual({
         geocoding: {
           version: '0.1.0',
-          licence: null,
-          attribution: 'Google Geocoding API',
+          licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
+          attribution: 'Powered by Google',
           query: null,
         },
         type: 'FeatureCollection',
@@ -159,11 +159,11 @@ describe('geocodejson-googleapis', () => {
         ],
       })
 
-      expect(parse(fixtures.componentFilteringResponse as GeocoderResponse)).toStrictEqual({
+      expect(parse(fixtures.componentFilteringResponse as GoogleAPIResponse)).toStrictEqual({
         geocoding: {
           version: '0.1.0',
-          licence: null,
-          attribution: 'Google Geocoding API',
+          licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
+          attribution: 'Powered by Google',
           query: null,
         },
         type: 'FeatureCollection',
@@ -196,22 +196,22 @@ describe('geocodejson-googleapis', () => {
         ],
       })
 
-      expect(parse(fixtures.zeroResultResponse as GeocoderResponse)).toStrictEqual({
+      expect(parse(fixtures.zeroResultResponse as GoogleAPIResponse)).toStrictEqual({
         geocoding: {
           version: '0.1.0',
-          licence: null,
-          attribution: 'Google Geocoding API',
+          licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
+          attribution: 'Powered by Google',
           query: null,
         },
         type: 'FeatureCollection',
         features: [],
       })
 
-      expect(parse(fixtures.filterOnlyReponse as GeocoderResponse)).toStrictEqual({
+      expect(parse(fixtures.filterOnlyReponse as GoogleAPIResponse)).toStrictEqual({
         geocoding: {
           version: '0.1.0',
-          licence: null,
-          attribution: 'Google Geocoding API',
+          licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
+          attribution: 'Powered by Google',
           query: null,
         },
         type: 'FeatureCollection',
@@ -246,7 +246,49 @@ describe('geocodejson-googleapis', () => {
     })
   })
 
+  describe('getFetchArgs', () => {
+    it('produce correct argument for a simple search', () => {
+      const params = { address: '1600 Amphitheatre Parkway, Mountain View, CA 94043, USA', apiKey: 'abcabc' } as any
+
+      const searchParams = new URLSearchParams({
+        language: 'en',
+        address: params.address,
+        key: params.apiKey,
+      })
+      searchParams.sort()
+
+      const { url, options } = getFetchArgs(params)
+      expect(options).toStrictEqual({ method: 'GET' })
+      expect(url).toEqual(`https://maps.googleapis.com/maps/api/geocode/json?${searchParams}`)
+    })
+
+    it('produce correct argument for a complex search', () => {
+      const params = {
+        address: '1600 Amphitheatre Parkway, Mountain View, CA 94043, USA',
+        apiKey: 'abcabc',
+        language: 'fr',
+        bounds: { northeast: { lat: 37.44, lng: -122.06 }, southwest: { lat: 37.41, lng: -122.1 } },
+        componentRestrictions: { country: 'US' },
+        region: 'US',
+      } as any
+
+      const searchParams = new URLSearchParams({
+        language: params.language,
+        address: params.address,
+        key: params.apiKey,
+        region: params.region,
+        bounds: '37.44,-122.06|37.41,-122.1',
+        components: 'country:US',
+      })
+      searchParams.sort()
+
+      const { url, options } = getFetchArgs(params)
+      expect(options).toStrictEqual({ method: 'GET' })
+      expect(url).toEqual(`https://maps.googleapis.com/maps/api/geocode/json?${searchParams}`)
+    })
+  })
+
   describe('geocode', () => {
-    // TODO: write some tests for the geocode function
+    // TODO: add tests with mocked response
   })
 })
