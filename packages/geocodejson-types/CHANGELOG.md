@@ -1,5 +1,11 @@
 # @p-j/geocodejson-types
 
+## 2.0.0
+
+### Major Changes
+
+- [`f1bf20e`](https://github.com/p-j/geocodejson/commit/f1bf20e4f8a248ddbbfb28ac229a73b030e3c376) [#20](https://github.com/p-j/geocodejson/pull/20) Thanks [@p-j](https://github.com/p-j)! - BREAKING: changing GeocodeResult.properties.geocoding.housenumber type from string | number to string
+
 ## 1.0.0
 
 ### Major Changes
