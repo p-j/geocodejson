@@ -1643,13 +1643,6 @@
     "@octokit/openapi-types" "^3.2.0"
     "@types/node" ">= 8"
 
-"@p-j/geocodejson-types@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@p-j/geocodejson-types/-/geocodejson-types-2.0.0.tgz#f9bd05b78fa610f113b18284edb3f4bf5ef7943c"
-  integrity sha512-QftKVJjqyZ9DqSKOSc8VIV+yAJ6AURU+5ntys7yjJo9P5MmZDVM5eUcceek9Z/hziZek7/w4iebKGsCwnKwldA==
-  dependencies:
-    "@types/geojson" "^7946.0.7"
-
 "@sinonjs/commons@^1.7.0":
   version "1.8.2"
   resolved "https://registry.yarnpkg.com/@sinonjs/commons/-/commons-1.8.2.tgz#858f5c4b48d80778fde4b9d541f27edc0d56488b"
