@@ -11,7 +11,7 @@
   "main": "dist/googleapis.js",
   "types": "dist/googleapis.d.ts",
   "dependencies": {
-    "@turf/helpers": "^6.3.0",
+    "@turf/helpers": "^6.4.0",
     "cross-fetch": "^3.1.4",
     "geojson": "^0.5.0",
     "ngeohash": "^0.6.3"
