@@ -1,7 +1,7 @@
 /// <reference types="@p-j/geocodejson-types/google.maps" />
 
 import * as geohash from 'ngeohash'
-import { GeocodeType, GeocodeResponse, GeocodeResult } from '@p-j/geocodejson-types'
+import { GeocodeType, GeocodeResponse, GeocodeResult, GeocodeOptions } from '@p-j/geocodejson-types'
 import { featureCollection, point } from '@turf/helpers'
 import fetch from 'cross-fetch'
 import { BBox, Position } from 'geojson'
@@ -10,17 +10,19 @@ export interface GoogleAPIResponse extends google.maps.GeocoderResponse {
   query?: string
 }
 
+export type GeocodeGoogleFilters = Pick<google.maps.GeocoderRequest, 'bounds' | 'componentRestrictions' | 'region'>
+
 /**
  * Geocode an address using Google API and the provided options including optional filter used to bias the search.
  * @param options.apiKey Google API key
  * @param options.language Language in which results should preferably be provided
  * @param options.address The address to geocode
- * @param filters Optional filters used to bias the search
+ * @param filters Optional filters used to bias the search; eg: `bounds`, `componentRestrictions` and/or `region`
  * @see https://developers.google.com/maps/documentation/javascript/reference/geocoder#GeocoderRequest
  */
 export async function geocode(
-  { apiKey, address, language = 'en' }: { apiKey: string; address: string; language?: string },
-  filters: Pick<google.maps.GeocoderRequest, 'bounds' | 'componentRestrictions' | 'region'> = {},
+  { apiKey, address, language = 'en' }: GeocodeOptions,
+  filters: GeocodeGoogleFilters = {},
 ): Promise<GoogleAPIResponse> {
   const { url, options } = getFetchArgs({ apiKey, address, language, ...filters })
   const response = await fetch(url, options)
@@ -45,11 +47,7 @@ export function getFetchArgs({
   bounds,
   componentRestrictions = {},
   region,
-}: Pick<google.maps.GeocoderRequest, 'bounds' | 'componentRestrictions' | 'region'> & {
-  apiKey: string
-  address: string
-  language?: string
-}) {
+}: GeocodeOptions & GeocodeGoogleFilters) {
   const boundsArg =
     bounds &&
     [[bounds.northeast.lat, bounds.northeast.lng].join(), [bounds.southwest.lat, bounds.southwest.lng].join()].join('|')

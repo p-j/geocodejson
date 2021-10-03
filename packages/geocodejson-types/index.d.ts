@@ -4,6 +4,12 @@ export as namespace GeocodeJSON
 
 export type GeocodeType = 'house' | 'street' | 'locality' | 'city' | 'region' | 'country' | string
 
+export interface GeocodeOptions {
+  apiKey: string
+  address: string
+  language?: string
+}
+
 export interface GeocodeResponse extends FeatureCollection {
   // REQUIRED. GeocodeJSON result is a FeatureCollection.
   type: 'FeatureCollection'
