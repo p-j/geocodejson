@@ -1,5 +1,13 @@
 # @p-j/geocodejson-googleapis
 
+## 2.0.2
+
+### Patch Changes
+
+- [#53](https://github.com/p-j/geocodejson/pull/53) [`ae9aa39`](https://github.com/p-j/geocodejson/commit/ae9aa39f0a769babc3ea9bcb5016dcca125cd1f3) Thanks [@p-j](https://github.com/p-j)! - feat(types): export parameter types
+
+* [#55](https://github.com/p-j/geocodejson/pull/55) [`d0a36b6`](https://github.com/p-j/geocodejson/commit/d0a36b6426e9c41bc2f9b209e388290cd1fd1f1c) Thanks [@p-j](https://github.com/p-j)! - chore(deps): upgrade dependencies
+
 ## 2.0.1
 
 ### Patch Changes
