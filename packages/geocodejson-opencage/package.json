@@ -1,5 +1,5 @@
 {
-  "name": "geocodejson-opencage",
+  "name": "@p-j/geocodejson-opencage",
   "version": "0.0.0",
   "description": "GeocodeJSON adapter for OpenCage Geocoding API",
   "author": "Jérémie Parker <hi@pkr.sh>",
