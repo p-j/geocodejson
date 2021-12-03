@@ -1,5 +1,5 @@
 ---
-'geocodejson-opencage': major
+'@p-j/geocodejson-opencage': major
 ---
 
 OpenCage Provider
