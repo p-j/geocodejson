@@ -4,12 +4,18 @@ export as namespace GeocodeJSON
 
 export type GeocodeType = 'house' | 'street' | 'locality' | 'city' | 'region' | 'country' | string
 
+/**
+ * Common parameter to all geocode implementation
+ */
 export interface GeocodeOptions {
-  apiKey: string
-  address: string
+  apiKey?: string
+  address?: string
   language?: string
 }
 
+/**
+ * GeocodeJSON Response interface
+ */
 export interface GeocodeResponse extends FeatureCollection {
   // REQUIRED. GeocodeJSON result is a FeatureCollection.
   type: 'FeatureCollection'
@@ -22,11 +28,11 @@ export interface GeocodeResponse extends FeatureCollection {
 
     // OPTIONAL. Default: null. The licence of the data. In case of multiple sources,
     // and then multiple licences, can be an object with one key by source.
-    licence: string | null
+    licence: string | Record<string, string> | null
 
     // OPTIONAL. Default: null. The attribution of the data. In case of multiple sources,
     // and then multiple attributions, can be an object with one key by source.
-    attribution: string | null
+    attribution: string | Record<string, string> | null
 
     // OPTIONAL. Default: null. The query that has been issued to trigger the search.
     query: string | null
@@ -95,4 +101,14 @@ interface GeocodeResult extends Feature {
 
   // REQUIRED. As per GeoJSON spec.
   geometry: Point
+}
+
+/**
+ * Utility types
+ */
+export type Primitive = bigint | boolean | null | number | string | symbol | undefined
+export type JSONValue = Primitive | JSONObject | JSONArray
+export type JSONArray = Array<JSONValue>
+export interface JSONObject {
+  [key: string]: JSONValue
 }
