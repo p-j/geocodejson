@@ -1,5 +1,16 @@
 # @p-j/geocodejson-types
 
+## 3.0.1
+
+### Patch Changes
+
+- [#58](https://github.com/p-j/geocodejson/pull/58) [`7c8d0a7`](https://github.com/p-j/geocodejson/commit/7c8d0a799d6b7de4bbacbf0d073aa04df840e9ac) Thanks [@p-j](https://github.com/p-j)! - Googleapis Provider v3
+
+  - use official types & serializer
+  - handle all native options
+  - upgrade to @p-j/geocodejson-types v3
+  - remove obsolete google.maps.d.ts
+
 ## 3.0.0
 
 ### Major Changes
