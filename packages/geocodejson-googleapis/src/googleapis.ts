@@ -14,7 +14,7 @@ import {
   defaultParamsSerializer as googleParamsSerializer,
 } from '@googlemaps/google-maps-services-js/dist/geocode/geocode'
 
-export type GoogleGeocodeRequestParams = GoogleGeocodeRequest['params']
+export type GoogleGeocodeRequestParams = Omit<GoogleGeocodeRequest['params'], 'client_id' | 'client_secret'>
 export type GoogleGeocodeResponse = GoogleGeocodeResponseData & { query?: string }
 export const googleBaseUrl = _googleBaseUrl
 
