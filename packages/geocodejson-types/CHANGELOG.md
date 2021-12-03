@@ -1,5 +1,14 @@
 # @p-j/geocodejson-types
 
+## 3.0.0
+
+### Major Changes
+
+- [#60](https://github.com/p-j/geocodejson/pull/60) [`1737aca`](https://github.com/p-j/geocodejson/commit/1737acad66a30946e9476b6522a78fc1f1579d5f) Thanks [@p-j](https://github.com/p-j)! - Update Shared Types
+
+  - make all GeocodeOptions members optional
+  - better follow the geocodejson spec by allowing multiple licence & attribution
+
 ## 2.0.1
 
 ### Patch Changes
