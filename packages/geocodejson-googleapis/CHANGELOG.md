@@ -1,5 +1,11 @@
 # @p-j/geocodejson-googleapis
 
+## 3.0.2
+
+### Patch Changes
+
+- [#65](https://github.com/p-j/geocodejson/pull/65) [`e6b2051`](https://github.com/p-j/geocodejson/commit/e6b2051d28a457509784f007b3ea7dc20276fd04) Thanks [@p-j](https://github.com/p-j)! - fix type conflict by omiting the deprecated PremiumPlan type from Google Maps Services types
+
 ## 3.0.1
 
 ### Patch Changes
