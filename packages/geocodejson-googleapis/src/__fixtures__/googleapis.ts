@@ -253,7 +253,7 @@ export const componentFilteringResponse = {
 }
 
 export const zeroResultResponse = {
-  results: [],
+  results: new Array<any>(),
   status: 'ZERO_RESULTS',
 }
 

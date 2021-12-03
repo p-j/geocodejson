@@ -1,4 +1,4 @@
-import { parse, geocode, GoogleAPIResponse, getFetchArgs } from './googleapis'
+import { parse, geocode, getFetchArgs, GoogleGeocodeResponse } from './googleapis'
 import * as fixtures from './__fixtures__/googleapis'
 
 // const jsonLog = (obj: Object, name?: string) => console.log(name, JSON.stringify(obj, null, 2))
@@ -11,7 +11,7 @@ describe('geocodejson-googleapis', () => {
 
   describe('parse', () => {
     it('converts google examples correctly', async () => {
-      expect(parse(fixtures.defaultResponse as GoogleAPIResponse)).toStrictEqual({
+      expect(parse(fixtures.defaultResponse as GoogleGeocodeResponse)).toStrictEqual({
         geocoding: {
           version: '0.1.0',
           licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
@@ -48,7 +48,7 @@ describe('geocodejson-googleapis', () => {
         ],
       })
 
-      expect(parse(fixtures.defaultResponse as GoogleAPIResponse, { short: true })).toStrictEqual({
+      expect(parse(fixtures.defaultResponse as GoogleGeocodeResponse, { short: true })).toStrictEqual({
         geocoding: {
           version: '0.1.0',
           licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
@@ -85,7 +85,7 @@ describe('geocodejson-googleapis', () => {
         ],
       })
 
-      expect(parse(fixtures.viewportBiasingResponse as GoogleAPIResponse)).toStrictEqual({
+      expect(parse(fixtures.viewportBiasingResponse as GoogleGeocodeResponse)).toStrictEqual({
         geocoding: {
           version: '0.1.0',
           licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
@@ -122,7 +122,7 @@ describe('geocodejson-googleapis', () => {
         ],
       })
 
-      expect(parse(fixtures.regionBiasingResponse as GoogleAPIResponse)).toStrictEqual({
+      expect(parse(fixtures.regionBiasingResponse as GoogleGeocodeResponse)).toStrictEqual({
         geocoding: {
           version: '0.1.0',
           licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
@@ -159,7 +159,7 @@ describe('geocodejson-googleapis', () => {
         ],
       })
 
-      expect(parse(fixtures.componentFilteringResponse as GoogleAPIResponse)).toStrictEqual({
+      expect(parse(fixtures.componentFilteringResponse as GoogleGeocodeResponse)).toStrictEqual({
         geocoding: {
           version: '0.1.0',
           licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
@@ -196,7 +196,7 @@ describe('geocodejson-googleapis', () => {
         ],
       })
 
-      expect(parse(fixtures.zeroResultResponse as GoogleAPIResponse)).toStrictEqual({
+      expect(parse(fixtures.zeroResultResponse as GoogleGeocodeResponse)).toStrictEqual({
         geocoding: {
           version: '0.1.0',
           licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
@@ -207,7 +207,7 @@ describe('geocodejson-googleapis', () => {
         features: [],
       })
 
-      expect(parse(fixtures.filterOnlyReponse as GoogleAPIResponse)).toStrictEqual({
+      expect(parse(fixtures.filterOnlyReponse as GoogleGeocodeResponse)).toStrictEqual({
         geocoding: {
           version: '0.1.0',
           licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
@@ -248,12 +248,11 @@ describe('geocodejson-googleapis', () => {
 
   describe('getFetchArgs', () => {
     it('produce correct argument for a simple search', () => {
-      const params = { address: '1600 Amphitheatre Parkway, Mountain View, CA 94043, USA', apiKey: 'abcabc' } as any
+      const params = { address: '1600 Amphitheatre Parkway, Mountain View, CA 94043, USA', key: 'abcabc' } as any
 
       const searchParams = new URLSearchParams({
-        language: 'en',
         address: params.address,
-        key: params.apiKey,
+        key: params.key,
       })
       searchParams.sort()
 
@@ -265,19 +264,19 @@ describe('geocodejson-googleapis', () => {
     it('produce correct argument for a complex search', () => {
       const params = {
         address: '1600 Amphitheatre Parkway, Mountain View, CA 94043, USA',
-        apiKey: 'abcabc',
+        key: 'abcabc',
         language: 'fr',
         bounds: { northeast: { lat: 37.44, lng: -122.06 }, southwest: { lat: 37.41, lng: -122.1 } },
-        componentRestrictions: { country: 'US' },
+        components: { country: 'US' },
         region: 'US',
       } as any
 
       const searchParams = new URLSearchParams({
         language: params.language,
         address: params.address,
-        key: params.apiKey,
+        key: params.key,
         region: params.region,
-        bounds: '37.44,-122.06|37.41,-122.1',
+        bounds: '37.41,-122.1|37.44,-122.06',
         components: 'country:US',
       })
       searchParams.sort()
