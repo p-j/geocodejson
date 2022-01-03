@@ -1,5 +1,11 @@
 # @p-j/geocodejson-googleapis
 
+## 3.1.0
+
+### Minor Changes
+
+- [#68](https://github.com/p-j/geocodejson/pull/68) [`239d610`](https://github.com/p-j/geocodejson/commit/239d61029e19f845165847510c32b9e2c23498db) Thanks [@p-j](https://github.com/p-j)! - Allow for filtering out partial match returned by Google API
+
 ## 3.0.2
 
 ### Patch Changes
