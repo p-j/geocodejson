@@ -243,6 +243,56 @@ describe('geocodejson-googleapis', () => {
           },
         ],
       })
+
+      expect(parse(fixtures.partialMatchResponse as GoogleGeocodeResponse)).toStrictEqual({
+        geocoding: {
+          version: '0.1.0',
+          licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
+          attribution: 'Powered by Google',
+          query: null,
+        },
+        type: 'FeatureCollection',
+        features: [
+          {
+            type: 'Feature',
+            bbox: [0.5906163, 50.8559061, 0.5957329, 50.8601041],
+            properties: {
+              geocoding: {
+                accuracy: 1000,
+                type: 'street',
+                label: 'High St, Hastings TN34 3EY, UK',
+                geohash: 'u103m6rrj',
+                street: 'High Street',
+                postcode: 'TN34 3EY',
+                county: 'East Sussex',
+                state: 'England',
+                country: 'United Kingdom',
+                district: undefined,
+                housenumber: undefined,
+                locality: undefined,
+                city: undefined,
+              },
+            },
+            geometry: {
+              type: 'Point',
+              coordinates: [0.5924594, 50.85830319999999],
+            },
+          },
+        ],
+      })
+
+      expect(
+        parse(fixtures.partialMatchResponse as GoogleGeocodeResponse, { excludePartialMatch: true }),
+      ).toStrictEqual({
+        geocoding: {
+          version: '0.1.0',
+          licence: 'https://cloud.google.com/maps-platform/terms/#3.-license.',
+          attribution: 'Powered by Google',
+          query: null,
+        },
+        type: 'FeatureCollection',
+        features: [],
+      })
     })
   })
 
