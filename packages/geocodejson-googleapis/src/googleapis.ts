@@ -16,6 +16,7 @@ import {
 
 export type GoogleGeocodeRequestParams = Omit<GoogleGeocodeRequest['params'], 'client_id' | 'client_secret'>
 export type GoogleGeocodeResponse = GoogleGeocodeResponseData & { query?: string }
+export type ParseOptions = { short?: boolean; excludePartialMatch?: boolean }
 export const googleBaseUrl = _googleBaseUrl
 
 /**
@@ -71,9 +72,14 @@ export function getFetchArgs(params: GoogleGeocodeRequestParams) {
  * Convert Google results into GeoJSON
  * @see https://developers.google.com/maps/documentation/geocoding/overview#GeocodingResponses
  */
-export function parse(response: GoogleGeocodeResponse, { short = false }: { short?: boolean } = {}): GeocodeResponse {
+export function parse(
+  response: GoogleGeocodeResponse,
+  { short = false, excludePartialMatch = false }: ParseOptions = {},
+): GeocodeResponse {
   const { results, query } = response
-  const geocodeResults = results.map((result) => parseResult(result, { short }))
+  const geocodeResults = results
+    .filter((result) => !result.partial_match || !excludePartialMatch)
+    .map((result) => parseResult(result, { short }))
 
   return Object.assign(
     {
@@ -206,6 +212,8 @@ function parseType(result: GoogleGeocodeResult): GeocodeType | string {
  * TODO: do some data analysis... Or get rid of it altogether...
  */
 function parseAccuracy(result: GoogleGeocodeResult): number | undefined {
+  // @see https://developers.google.com/maps/documentation/javascript/reference/geocoder#GeocoderResult.partial_match
+  if (result.partial_match) return 1000
   switch (result.geometry.location_type) {
     case 'ROOFTOP':
       return 10
