@@ -1,5 +1,12 @@
 # @p-j/geocodejson-opencage
 
+## 1.0.1
+
+### Patch Changes
+
+- [#72](https://github.com/p-j/geocodejson/pull/72) [`a44ec1d`](https://github.com/p-j/geocodejson/commit/a44ec1da062fa5075a8f8240c35784ab3d5c9301) Thanks [@p-j](https://github.com/p-j)! - - ensure proper parameter priority in the geocode function
+  - fix type to ensure an API Key is provided
+
 ## 1.0.0
 
 ### Major Changes
