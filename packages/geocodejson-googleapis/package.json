@@ -12,8 +12,8 @@
   "bugs": {
     "url": "https://github.com/p-j/geocodejson/issues"
   },
-  "main": "dist/googleapis.js",
-  "types": "dist/googleapis.d.ts",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "dependencies": {
     "@googlemaps/google-maps-services-js": "^3.3.3",
     "@turf/helpers": "^6.4.0",

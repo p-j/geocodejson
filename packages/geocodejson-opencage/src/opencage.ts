@@ -1,13 +1,13 @@
-import { GeocodeOptions, GeocodeResult, GeocodeResponse } from '@p-j/geocodejson-types'
-import { Feature, Point } from 'geojson'
-import fetch from 'cross-fetch'
-import * as geohash from 'ngeohash'
-import { featureCollection } from '@turf/helpers'
-import {
+import type { GeocodeOptions, GeocodeResult, GeocodeResponse } from '@p-j/geocodejson-types'
+import type {
   OpenCageGeocodeRequestParams,
   OpenCageGeoJSONResponse,
   OpenCageGeoJSONFeatureProperties,
 } from './opencage.types'
+import { Feature, Point } from 'geojson'
+import fetch from 'cross-fetch'
+import * as geohash from 'ngeohash'
+import { featureCollection } from '@turf/helpers'
 
 export const opencageBaseUrl = 'https://api.opencagedata.com/geocode/v1/geojson'
 
