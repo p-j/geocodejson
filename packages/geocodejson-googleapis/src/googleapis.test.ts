@@ -298,7 +298,7 @@ describe('geocodejson-googleapis', () => {
 
   describe('getFetchArgs', () => {
     it('produce correct argument for a simple search', () => {
-      const params = { address: '1600 Amphitheatre Parkway, Mountain View, CA 94043, USA', key: 'abcabc' } as any
+      const params = { address: '1600 Amphitheatre Parkway, Mountain View, CA 94043, USA', key: 'abcabc' }
 
       const searchParams = new URLSearchParams({
         address: params.address,
