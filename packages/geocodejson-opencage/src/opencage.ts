@@ -11,15 +11,20 @@ import { featureCollection } from '@turf/helpers'
 
 export const opencageBaseUrl = 'https://api.opencagedata.com/geocode/v1/geojson'
 
+export type GeocodeParams = ({ apiKey: string; key?: string } | { apiKey?: string; key: string }) &
+  GeocodeOptions &
+  OpenCageGeocodeRequestParams
+
 /**
  * Geocode an address using OpenCage Forward Geocoding GeoJSON API
  *
  * __Common parameter to all geocoder__
- * @param options.apiKey Google API key (takes precedence over `key`)
+ * @param options.apiKey Opencage API key (takes precedence over `key`)
  * @param options.language Language in which results should preferably be provided (IETF format: es, pt-BR etc...)
  * @param options.address The street address to geocode (avoiding business names, building names etc...)
  *
  * __Parameters specific to OpenCage__
+ * @param options.key a 30 character long, alphanumeric string.	Used if apiKey is not provided.
  * @param options.q the query string to be geocoded: a latitude, longitude or a placename/address. This is superseded by options.address.
  * @param options.abbrv When set to 1 we attempt to abbreviate and shorten the formatted string we return. Learn more about formatted placenames.
  * @param options.add_request When set to 1 the various request parameters are added to the response for ease of debugging.
@@ -38,8 +43,12 @@ export const opencageBaseUrl = 'https://api.opencagedata.com/geocode/v1/geojson'
  * @param options.roadinfo When set to 1 the behaviour of the geocoder is changed to attempt to match the nearest road (as opposed to address). If possible we also fill additional information in the roadinfo annotation. Please see details API Documentation.
  * @see https://opencagedata.com/api#forward
  */
-export async function geocode(params: GeocodeOptions & OpenCageGeocodeRequestParams): Promise<OpenCageGeoJSONResponse> {
-  const { url, options } = getFetchArgs({ q: params.address, ...params })
+export async function geocode(params: GeocodeParams): Promise<OpenCageGeoJSONResponse> {
+  const { url, options } = getFetchArgs({
+    ...params,
+    q: params.address || params.q,
+    key: params.apiKey || params.key,
+  })
   const response = await fetch(url, options)
   const json = await response.json()
   return Object.assign(json, { query: params.address ?? params.q })
