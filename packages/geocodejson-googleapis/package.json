@@ -1,6 +1,6 @@
 {
   "name": "@p-j/geocodejson-googleapis",
-  "version": "3.1.0",
+  "version": "3.1.1",
   "description": "GeocodeJSON adapter for Google Maps Geocoding API",
   "author": "Jérémie Parker <hi@pkr.sh>",
   "homepage": "https://github.com/p-j/geocodejson#readme",

@@ -1,5 +1,12 @@
 # @p-j/geocodejson-googleapis
 
+## 3.1.1
+
+### Patch Changes
+
+- [#70](https://github.com/p-j/geocodejson/pull/70) [`ef981ef`](https://github.com/p-j/geocodejson/commit/ef981efbffc2c509f568921e8bb3a90c57a64372) Thanks [@p-j](https://github.com/p-j)! - Recognize the key parameters for getFetchArgs
+  Ensure at least one of apiKey and key is given to geocode
+
 ## 3.1.0
 
 ### Minor Changes
