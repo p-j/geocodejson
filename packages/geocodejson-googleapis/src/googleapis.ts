@@ -8,15 +8,22 @@ import type {
   GeocodeResponseData as GoogleGeocodeResponseData,
   GeocodeResult as GoogleGeocodeResult,
   AddressComponent as GoogleAddressComponent,
+  ApiKeyParams,
 } from '@googlemaps/google-maps-services-js'
 import {
   defaultUrl as _googleBaseUrl,
   defaultParamsSerializer as googleParamsSerializer,
 } from '@googlemaps/google-maps-services-js/dist/geocode/geocode'
 
-export type GoogleGeocodeRequestParams = Omit<GoogleGeocodeRequest['params'], 'client_id' | 'client_secret'>
+export type GoogleGeocodeRequestParams = Omit<GoogleGeocodeRequest['params'], 'client_id' | 'client_secret'> &
+  ApiKeyParams
 export type GoogleGeocodeResponse = GoogleGeocodeResponseData & { query?: string }
 export type ParseOptions = { short?: boolean; excludePartialMatch?: boolean }
+
+export type GeocodeParams = ({ apiKey: string; key?: string } | { apiKey?: string; key: string }) &
+  Omit<GeocodeOptions, 'apiKey'> &
+  Omit<GoogleGeocodeRequestParams, 'key'>
+
 export const googleBaseUrl = _googleBaseUrl
 
 /**
@@ -33,18 +40,20 @@ export const googleBaseUrl = _googleBaseUrl
  * @param options.region Country code used to bias the search, specified as a Unicode region subtag / CLDR identifier.
  * @param options.components Components are used to restrict results to a specific area. A filter consists of one or more of: route, locality, administrativeArea, postalCode, country. Only the results that match all the filters will be returned. Filter values support the same methods of spelling correction and partial matching as other geocoding requests @see https://developers.google.com/maps/documentation/javascript/reference/geocoder#GeocoderRequest.componentRestrictions
  * @param options.key Google API key (superseded by apiKey if provided)
+ *
+ * __For more details on Google's options__
  * @see https://developers.google.com/maps/documentation/geocoding/overview#GeocodingRequests
  * @see https://developers.google.com/maps/documentation/javascript/reference/geocoder#GeocoderRequest
- *
  */
 export async function geocode({
   apiKey,
   address,
   language = 'en',
   ...providerParams
-}: GeocodeOptions & GoogleGeocodeRequestParams): Promise<GoogleGeocodeResponse> {
-  if (apiKey) Object.assign(providerParams, { key: apiKey })
-  const { url, options } = getFetchArgs({ address, language, ...providerParams })
+}: GeocodeParams): Promise<GoogleGeocodeResponse> {
+  const key = apiKey || providerParams.key
+  if (!key) throw new Error('The Google API Key must be provided either as "apiKey" or "key".') // the type definition prevent this case but the type inference doesn't
+  const { url, options } = getFetchArgs({ ...providerParams, address, language, key })
   const response = await fetch(url, options)
   const json = await response.json()
   return Object.assign(json, { query: address })
@@ -58,7 +67,7 @@ export async function geocode({
  * @param options.bounds Bounds within which to search.
  * @param options.components Components are used to restrict results to a specific area. A filter consists of one or more of: route, locality, administrativeArea, postalCode, country. Only the results that match all the filters will be returned. Filter values support the same methods of spelling correction and partial matching as other geocoding requests @see https://developers.google.com/maps/documentation/javascript/reference/geocoder#GeocoderRequest.componentRestrictions
  * @param options.region Country code used to bias the search, specified as a Unicode region subtag / CLDR identifier.
- * @param options.key Google API key (superseded by apiKey if provided)
+ * @param options.key Google API key
  * @see https://developers.google.com/maps/documentation/geocoding/overview#GeocodingRequests
  * @see https://developers.google.com/maps/documentation/javascript/reference/geocoder#GeocoderRequest
  */
