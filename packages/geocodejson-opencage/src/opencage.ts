@@ -76,19 +76,15 @@ export async function geocode(params: GeocodeParams): Promise<OpenCageGeoJSONRes
  * @see https://opencagedata.com/api#forward
  */
 export function getFetchArgs(params: OpenCageGeocodeRequestParams) {
-  // Con
   if (params.bounds && typeof params.bounds !== 'string') {
-    // const minlon = Math.min(params.bounds[0]['coordinates'][0], params.bounds[1]['coordinates'][0])
-    // const minlat = Math.min(params.bounds[0]['coordinates'][1], params.bounds[1]['coordinates'][1])
-    // const maxlon = Math.max(params.bounds[0]['coordinates'][0], params.bounds[1]['coordinates'][0])
-    // const maxlat = Math.max(params.bounds[0]['coordinates'][1], params.bounds[1]['coordinates'][1])
-    // params.bounds = [minlon, minlat, maxlon, maxlat].join(',')
     params.bounds = params.bounds.join(',')
   }
+
   const searchParams = new URLSearchParams(
     Object.entries(params).reduce((acc, [k, v]) => Object.assign(acc, { [k]: String(v) }), {}),
   )
   searchParams.sort()
+
   return { url: `${opencageBaseUrl}?${searchParams}`, options: { method: 'GET' } }
 }
 

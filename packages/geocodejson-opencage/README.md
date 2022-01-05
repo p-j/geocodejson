@@ -36,8 +36,8 @@ const { url, options } = getFetchArgs({
 // options = { method: 'GET' }
 
 // using cross-fetch; also adds the "query" property to the response
-const rawResponseFromGoogleApis = await geocode({
-  apiKey: 'YOUR-GOOGLE-API-KEY-HERE',
+const rawResponseFromOpenCageApis = await geocode({
+  apiKey: 'YOUR-OPENCAGE-API-KEY-HERE',
   address: 'Place de la République, Paris, France',
   language: 'fr',
   bounds: [2.3622065, 48.8662754697085, 2.3657448, 48.8689734302915],
@@ -118,7 +118,7 @@ const rawResponseFromGoogleApis = await geocode({
 //   "query": "Place de la République, Paris, France"
 // }
 
-const geocodeJSONFormatedResults = parse(rawResponseFromGoogleApis)
+const geocodeJSONFormatedResults = parse(rawResponseFromOpenCageApis)
 // {
 //   "geocoding": {
 //     "version": "0.1.0",
