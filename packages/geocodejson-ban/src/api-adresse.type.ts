@@ -1,3 +1,4 @@
+import type { JSONObject } from '@p-j/geocodejson-types'
 import type { Point, FeatureCollection } from 'geojson'
 
 export type BANGeocodeRequestParams = {
@@ -20,7 +21,7 @@ export interface BANGeocodeResponse extends FeatureCollection<Point, BANProperti
   filters?: Record<string, string>
 }
 
-export interface BANProperties extends Record<string, any> {
+export interface BANProperties extends JSONObject {
   label: string
   score: number
   housenumber?: string
