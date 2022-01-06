@@ -1,0 +1,32 @@
+{
+  "name": "@p-j/geocodejson-ban",
+  "version": "0.0.0",
+  "description": "GeocodeJSON adapter for the French Base Adresse Nationale (api-adresse.data.gouv.fr)",
+  "author": "Jérémie Parker <hi@pkr.sh>",
+  "homepage": "https://github.com/p-j/geocodejson#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/p-j/geocodejson.git"
+  },
+  "bugs": {
+    "url": "https://github.com/p-j/geocodejson/issues"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rimraf ./dist && tsc -b ./tsconfig.build.json",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@turf/helpers": "^6.4.0",
+    "cross-fetch": "^3.1.4",
+    "geojson": "^0.5.0",
+    "ngeohash": "^0.6.3"
+  },
+  "devDependencies": {
+    "@p-j/geocodejson-types": "3.0.1",
+    "@types/jest": "27.4.0",
+    "@types/ngeohash": "0.6.4"
+  }
+}
