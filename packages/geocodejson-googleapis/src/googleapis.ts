@@ -1,8 +1,5 @@
-import * as geohash from 'ngeohash'
-import { GeocodeType, GeocodeResponse, GeocodeResult, GeocodeOptions } from '@p-j/geocodejson-types'
-import { featureCollection, point } from '@turf/helpers'
-import fetch from 'cross-fetch'
-import { BBox, Position } from 'geojson'
+import type { BBox, Position } from 'geojson'
+import type { GeocodeType, GeocodeResponse, GeocodeOptions, GeocodeFeature } from '@p-j/geocodejson-types'
 import type {
   GeocodeRequest as GoogleGeocodeRequest,
   GeocodeResponseData as GoogleGeocodeResponseData,
@@ -10,10 +7,13 @@ import type {
   AddressComponent as GoogleAddressComponent,
   ApiKeyParams,
 } from '@googlemaps/google-maps-services-js'
+import { featureCollection, point } from '@turf/helpers'
+import fetch from 'cross-fetch'
 import {
   defaultUrl as _googleBaseUrl,
   defaultParamsSerializer as googleParamsSerializer,
 } from '@googlemaps/google-maps-services-js/dist/geocode/geocode'
+import * as geohash from 'ngeohash'
 
 export type GoogleGeocodeRequestParams = Omit<GoogleGeocodeRequest['params'], 'client_id' | 'client_secret'> &
   ApiKeyParams
@@ -107,7 +107,7 @@ export function parse(
  * Turn a Google Geocode result into a GeocodeJSON result
  * @see https://developers.google.com/maps/documentation/geocoding/overview#GeocodingResponses
  */
-function parseResult(result: GoogleGeocodeResult, { short = false }: { short?: boolean } = {}): GeocodeResult {
+function parseResult(result: GoogleGeocodeResult, { short = false }: { short?: boolean } = {}): GeocodeFeature {
   // Google <-> GeocodeJSON Mapping
   const {
     street_number: housenumber,
