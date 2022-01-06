@@ -1,4 +1,5 @@
-import { BBox, FeatureCollection, GeoJsonProperties, Point } from 'geojson'
+import type { JSONObject } from '@p-j/geocodejson-types'
+import type { BBox, FeatureCollection, Point } from 'geojson'
 
 /**
  * Interface Largely inspired/copied from https://github.com/tsamaya/opencage-api-client/blob/master/index.d.ts
@@ -134,7 +135,7 @@ export interface OpenCageGeoJSONResponse extends FeatureCollection<Point, OpenCa
  * OpenCage GeoJSON Feature
  * @see https://opencagedata.com/api#forward-resp
  */
-export type OpenCageGeoJSONFeatureProperties = {
+export interface OpenCageGeoJSONFeatureProperties extends JSONObject {
   annotations?: Record<string, any>
   bounds?: { northeast: { lat: number; lng: number }; southwest: { lat: number; lng: number } }
   // Non exauhstive list of possible keys
@@ -210,4 +211,4 @@ export type OpenCageGeoJSONFeatureProperties = {
   }
   confidence?: number
   formatted?: string
-} & GeoJsonProperties
+}

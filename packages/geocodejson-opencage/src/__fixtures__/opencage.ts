@@ -1,4 +1,4 @@
-import { OpenCageGeoJSONResponse } from '../opencage.types'
+import type { OpenCageGeoJSONResponse } from '../opencage.types'
 
 export const attractionType: OpenCageGeoJSONResponse = {
   documentation: 'https://opencagedata.com/api',
@@ -9,80 +9,6 @@ export const attractionType: OpenCageGeoJSONResponse = {
         type: 'Point',
       },
       properties: {
-        annotations: {
-          DMS: {
-            lat: "48° 52' 3.15120'' N",
-            lng: "2° 21' 50.25024'' E",
-          },
-          MGRS: '31UDQ5335512926',
-          Maidenhead: 'JN18eu38qf',
-          Mercator: {
-            x: 263154.64,
-            y: 6220215.563,
-          },
-          OSM: {
-            edit_url: 'https://www.openstreetmap.org/edit?way=450130138#map=17/48.86754/2.36396',
-            note_url: 'https://www.openstreetmap.org/note/new#map=17/48.86754/2.36396&layers=N',
-            url: 'https://www.openstreetmap.org/?mlat=48.86754&mlon=2.36396#map=17/48.86754/2.36396',
-          },
-          UN_M49: {
-            regions: {
-              EUROPE: '150',
-              FR: '250',
-              WESTERN_EUROPE: '155',
-              WORLD: '001',
-            },
-            statistical_groupings: ['MEDC'],
-          },
-          callingcode: 33,
-          currency: {
-            alternate_symbols: [],
-            decimal_mark: ',',
-            html_entity: '&#x20AC;',
-            iso_code: 'EUR',
-            iso_numeric: '978',
-            name: 'Euro',
-            smallest_denomination: 1,
-            subunit: 'Cent',
-            subunit_to_unit: 100,
-            symbol: '€',
-            symbol_first: 0,
-            thousands_separator: '.',
-          },
-          flag: '🇫🇷',
-          geohash: 'u09wjb16h4p4grph6rtd',
-          qibla: 119.19,
-          roadinfo: {
-            drive_on: 'right',
-            road: 'Rue du Temple',
-            speed_in: 'km/h',
-          },
-          sun: {
-            rise: {
-              apparent: 1638343380,
-              astronomical: 1638336600,
-              civil: 1638341220,
-              nautical: 1638338880,
-            },
-            set: {
-              apparent: 1638374100,
-              astronomical: 1638380940,
-              civil: 1638376320,
-              nautical: 1638378660,
-            },
-          },
-          timezone: {
-            name: 'Europe/Paris',
-            now_in_dst: 0,
-            offset_sec: 3600,
-            offset_string: '+0100',
-            short_name: 'CET',
-          },
-          what3words: {
-            words: 'late.cracks.however',
-          },
-          wikidata: 'Q175055',
-        },
         bounds: {
           northeast: {
             lat: 48.8684016,
@@ -156,79 +82,6 @@ export const buildingType: OpenCageGeoJSONResponse = {
         type: 'Point',
       },
       properties: {
-        annotations: {
-          DMS: {
-            lat: "48° 47' 57.21144'' N",
-            lng: "2° 7' 29.14644'' E",
-          },
-          MGRS: '31UDQ3572605506',
-          Maidenhead: 'JN18bt41xt',
-          Mercator: {
-            x: 236527.524,
-            y: 6208695.894,
-          },
-          OSM: {
-            edit_url: 'https://www.openstreetmap.org/edit?node=5839612058#map=16/48.79923/2.12476',
-            note_url: 'https://www.openstreetmap.org/note/new#map=16/48.79923/2.12476&layers=N',
-            url: 'https://www.openstreetmap.org/?mlat=48.79923&mlon=2.12476#map=16/48.79923/2.12476',
-          },
-          UN_M49: {
-            regions: {
-              EUROPE: '150',
-              FR: '250',
-              WESTERN_EUROPE: '155',
-              WORLD: '001',
-            },
-            statistical_groupings: ['MEDC'],
-          },
-          callingcode: 33,
-          currency: {
-            alternate_symbols: [],
-            decimal_mark: ',',
-            html_entity: '&#x20AC;',
-            iso_code: 'EUR',
-            iso_numeric: '978',
-            name: 'Euro',
-            smallest_denomination: 1,
-            subunit: 'Cent',
-            subunit_to_unit: 100,
-            symbol: '€',
-            symbol_first: 0,
-            thousands_separator: '.',
-          },
-          flag: '🇫🇷',
-          geohash: 'u09t87ehndfn3950fhv1',
-          qibla: 118.85,
-          roadinfo: {
-            drive_on: 'right',
-            road: 'Rue du Général Leclerc',
-            speed_in: 'km/h',
-          },
-          sun: {
-            rise: {
-              apparent: 1638343440,
-              astronomical: 1638336660,
-              civil: 1638341280,
-              nautical: 1638338880,
-            },
-            set: {
-              apparent: 1638374220,
-              astronomical: 1638381000,
-              civil: 1638376380,
-              nautical: 1638378720,
-            },
-          },
-          timezone: {
-            name: 'Europe/Paris',
-            now_in_dst: 0,
-            offset_sec: 3600,
-            offset_string: '+0100',
-            short_name: 'CET',
-          },
-          what3words: {
-            words: 'clown.napkins.airtime',
-          },
-        },
         bounds: {
           northeast: {
             lat: 48.7992754,
