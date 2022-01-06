@@ -1,10 +1,10 @@
-import type { GeocodeOptions, GeocodeResult, GeocodeResponse } from '@p-j/geocodejson-types'
+import type { Feature, Point } from 'geojson'
+import type { GeocodeOptions, GeocodeFeature, GeocodeResponse } from '@p-j/geocodejson-types'
 import type {
   OpenCageGeocodeRequestParams,
   OpenCageGeoJSONResponse,
   OpenCageGeoJSONFeatureProperties,
 } from './opencage.types'
-import { Feature, Point } from 'geojson'
 import fetch from 'cross-fetch'
 import * as geohash from 'ngeohash'
 import { featureCollection } from '@turf/helpers'
@@ -88,11 +88,10 @@ export function getFetchArgs(params: OpenCageGeocodeRequestParams) {
   return { url: `${opencageBaseUrl}?${searchParams}`, options: { method: 'GET' } }
 }
 
-export type ParseOptions = { annotations?: boolean; full?: boolean }
 /**
  * Convert OpenCage GeoJSON response to a GeocodeJSON one
  */
-export function parse(response: OpenCageGeoJSONResponse, options?: ParseOptions): GeocodeResponse {
+export function parse(response: OpenCageGeoJSONResponse): GeocodeResponse {
   const { query } = response
   return Object.assign(
     {
@@ -106,7 +105,7 @@ export function parse(response: OpenCageGeoJSONResponse, options?: ParseOptions)
         query: query || null,
       },
     },
-    featureCollection(response.features.map((result) => parseResult(result, options))),
+    featureCollection(response.features.map(parseResult)),
   )
 }
 
@@ -115,31 +114,29 @@ export function parse(response: OpenCageGeoJSONResponse, options?: ParseOptions)
  */
 export function parseResult(
   result: Feature<Point, OpenCageGeoJSONFeatureProperties>,
-  options?: ParseOptions,
-): GeocodeResult {
-  const geocoding: GeocodeResult['properties']['geocoding'] = {
-    accuracy: result.properties?.confidence,
-    type: result.properties?.components?._type ?? 'unknown',
-    label: result.properties?.formatted,
-    geohash:
-      result.properties?.annotations?.geohash ??
-      geohash.encode(result.geometry.coordinates[1], result.geometry.coordinates[0]),
-    housenumber: result.properties.components?.house_number ?? result.properties.components?.street_number,
-    street: getFirstMatchingKey(ALIASES['street'], result.properties.components),
-    locality: getFirstMatchingKey(ALIASES['locality'], result.properties.components),
-    postcode: getFirstMatchingKey(ALIASES['postcode'], result.properties.components),
-    city: getFirstMatchingKey(ALIASES['city'], result.properties.components),
-    district: getFirstMatchingKey(ALIASES['district'], result.properties.components),
-    county: getFirstMatchingKey(ALIASES['county'], result.properties.components),
-    state: getFirstMatchingKey(ALIASES['state'], result.properties.components),
-    country: getFirstMatchingKey(ALIASES['country'], result.properties.components),
+): GeocodeFeature<OpenCageGeoJSONFeatureProperties> {
+  return {
+    ...result,
+    properties: {
+      ...result.properties,
+      geocoding: {
+        type: result.properties?.components?._type ?? 'unknown',
+        label: result.properties?.formatted,
+        geohash:
+          result.properties?.annotations?.geohash ??
+          geohash.encode(result.geometry.coordinates[1], result.geometry.coordinates[0]),
+        housenumber: result.properties.components?.house_number ?? result.properties.components?.street_number,
+        street: getFirstMatchingKey(ALIASES['street'], result.properties.components),
+        locality: getFirstMatchingKey(ALIASES['locality'], result.properties.components),
+        postcode: getFirstMatchingKey(ALIASES['postcode'], result.properties.components),
+        city: getFirstMatchingKey(ALIASES['city'], result.properties.components),
+        district: getFirstMatchingKey(ALIASES['district'], result.properties.components),
+        county: getFirstMatchingKey(ALIASES['county'], result.properties.components),
+        state: getFirstMatchingKey(ALIASES['state'], result.properties.components),
+        country: getFirstMatchingKey(ALIASES['country'], result.properties.components),
+      },
+    },
   }
-
-  const properties: OpenCageGeoJSONFeatureProperties & GeocodeResult['properties'] = { geocoding }
-  if (options?.annotations) Object.assign(properties, { annotations: result.properties.annotations })
-  if (options?.full) Object.assign(properties, result.properties)
-
-  return Object.assign({}, result, { properties })
 }
 
 export function getFirstMatchingKey(keys: string[], obj?: Record<string, string>): string | undefined {

@@ -1,6 +1,7 @@
-import type { GeocodeOptions, GeocodeResult, GeocodeResponse } from '@p-j/geocodejson-types'
+import type { GeocodeOptions, GeocodeFeature, GeocodeResponse } from '@p-j/geocodejson-types'
+import type { BANGeocodeRequestParams, BANGeocodeResponse, BANProperties } from './api-adresse.type'
 import fetch from 'cross-fetch'
-import { BANGeocodeRequestParams, BANGeocodeResponse } from '.'
+import * as geohash from 'ngeohash'
 
 export type GeocodeParams = ({ address: string; q?: string } | { address?: string; q: string }) &
   Omit<GeocodeOptions, 'address'> &
@@ -58,9 +59,9 @@ export function getFetchArgs(params: BANGeocodeRequestParams) {
   return { url: `${BANBaseUrl}?${searchParams}`, options: { method: 'GET' } }
 }
 
-export function parse(response: BANGeocodeResponse): GeocodeResponse {
+export function parse(response: BANGeocodeResponse): GeocodeResponse<{}, BANProperties> {
   const { version, features, query = null, attribution = null, licence = null, ...rest } = response
-  return Object.assign({
+  return {
     geocoding: {
       version,
       licence,
@@ -69,18 +70,18 @@ export function parse(response: BANGeocodeResponse): GeocodeResponse {
     },
     features: features.map(parseResult),
     ...rest,
-  })
+  }
 }
 
 /**
  * Convert BAN GeoJSON feature to a GeocodeJSON one
  */
-export function parseResult(result: BANGeocodeResponse['features'][number]): GeocodeResult {
+export function parseResult(result: BANGeocodeResponse['features'][number]): GeocodeFeature<{}, BANProperties> {
   const { properties, ...rest } = result
   return {
     ...rest,
     properties: {
-      geocoding: properties,
+      geocoding: { ...properties, geohash: geohash.encode(rest.geometry.coordinates[1], rest.geometry.coordinates[0]) },
     },
   }
 }
