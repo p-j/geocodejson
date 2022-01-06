@@ -34,7 +34,7 @@ const { url, options } = getFetchArgs({
 // options = { method: 'GET' }
 
 // using cross-fetch; also adds the "query" property to the response
-const rawResponseFromOpenCageApis = await geocode({
+const rawResponseFromBANApi = await geocode({
   address: 'Place de la République, Paris, France',
   limit: 1,
 })
