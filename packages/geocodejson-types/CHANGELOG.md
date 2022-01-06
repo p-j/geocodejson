@@ -1,5 +1,14 @@
 # @p-j/geocodejson-types
 
+## 4.0.0
+
+### Major Changes
+
+- [#76](https://github.com/p-j/geocodejson/pull/76) [`a4b0aae`](https://github.com/p-j/geocodejson/commit/a4b0aae23c23c67a4eec8bb4e930d2d75a09338b) Thanks [@p-j](https://github.com/p-j)! - open ended types
+
+  types are more composable
+  the geocoder response may contain extra data provided by the original source while preserving a subset of common properties
+
 ## 3.0.1
 
 ### Patch Changes
