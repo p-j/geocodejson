@@ -1,6 +1,6 @@
 {
   "name": "@p-j/geocodejson-ban",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "GeocodeJSON adapter for the French Base Adresse Nationale (api-adresse.data.gouv.fr)",
   "author": "Jérémie Parker <hi@pkr.sh>",
   "homepage": "https://github.com/p-j/geocodejson#readme",
