@@ -1,5 +1,11 @@
 # @p-j/geocodejson-types
 
+## 4.0.1
+
+### Patch Changes
+
+- [`c2f7389`](https://github.com/p-j/geocodejson/commit/c2f7389c3a199f1e187e23fa1450587181edad1a) Thanks [@p-j](https://github.com/p-j)! - Upgrade dependencies
+
 ## 4.0.0
 
 ### Major Changes

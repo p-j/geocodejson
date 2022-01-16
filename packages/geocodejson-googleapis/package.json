@@ -1,6 +1,6 @@
 {
   "name": "@p-j/geocodejson-googleapis",
-  "version": "3.1.2",
+  "version": "3.1.3",
   "description": "GeocodeJSON adapter for Google Maps Geocoding API",
   "author": "Jérémie Parker <hi@pkr.sh>",
   "homepage": "https://github.com/p-j/geocodejson#readme",
@@ -22,7 +22,7 @@
     "ngeohash": "^0.6.3"
   },
   "devDependencies": {
-    "@p-j/geocodejson-types": "4.0.0",
+    "@p-j/geocodejson-types": "4.0.1",
     "@types/jest": "27.4.0",
     "@types/ngeohash": "0.6.4"
   },
