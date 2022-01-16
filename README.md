@@ -43,7 +43,7 @@ _aka: TODO_
 - Add autocomplete
 - Add feature details endpoint (aka: place details)
 
-## Inpiration
+## Inspiration
 
 This package was inspired by the [`geocodejson-spec`](https://github.com/geocoders/geocodejson-spec/tree/master/draft), [`geocoder-geojson`](https://github.com/DenisCarriere/geocoder-geojson#readme), [`geo-coder`](https://github.com/allenhwkim/geo-coder) and [`node-geocoder`](https://github.com/nchaulet/node-geocoder)
 
