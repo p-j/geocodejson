@@ -37,7 +37,12 @@ export interface GeocodeResponse<P = GeoJsonProperties, G = JSONObject>
   }
 }
 
-export type GeocodeFeature<P = GeoJsonProperties, G = JSONObject> = Feature<Point, GeocodeFeatureProperties<G> & P>
+/**
+ * Represent a Geocoding result: it is a Point Feature with
+ * - the specific `geocoding` property
+ * - any inherited properties from the geocode provider, extending either the `properties` (P) or the `properties.geocoding` (G)
+ */
+export type GeocodeFeature<P = GeoJsonProperties, G = JSONObject> = Feature<Point, P & GeocodeFeatureProperties<G>>
 
 export interface GeocodeFeatureProperties<G> extends JSONObject {
   // REQUIRED. Namespace.
@@ -91,6 +96,9 @@ export interface GeocodingProperties extends JSONObject {
 
   // OPTIONAL. Geohash encoding of coordinates (see http://geohash.org/site/tips.html).
   geohash?: string
+
+  // OPTIONAL. ADDITION. A value between 0 and 1 that represente the confidence that the result match the query.
+  confidence?: number
 }
 
 /**

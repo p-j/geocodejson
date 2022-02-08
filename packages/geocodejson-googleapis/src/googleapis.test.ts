@@ -24,8 +24,9 @@ describe('geocodejson-googleapis', () => {
             type: 'Feature',
             bbox: [-122.0855988802915, 37.4211274197085, -122.0829009197085, 37.4238253802915],
             properties: {
+              pluscode: '849VCWC8+W5',
               geocoding: {
-                accuracy: 10,
+                confidence: 0.9,
                 type: 'house',
                 label: '1600 Amphitheatre Parkway, Mountain View, CA 94043, USA',
                 geohash: '9q9hvuscw',
@@ -61,8 +62,9 @@ describe('geocodejson-googleapis', () => {
             type: 'Feature',
             bbox: [-122.0855988802915, 37.4211274197085, -122.0829009197085, 37.4238253802915],
             properties: {
+              pluscode: '849VCWC8+W5',
               geocoding: {
-                accuracy: 10,
+                confidence: 0.9,
                 type: 'house',
                 label: '1600 Amphitheatre Parkway, Mountain View, CA 94043, USA',
                 geohash: '9q9hvuscw',
@@ -99,7 +101,7 @@ describe('geocodejson-googleapis', () => {
             bbox: [-118.588536, 34.1854649, -118.5534191, 34.2355209],
             properties: {
               geocoding: {
-                accuracy: 1000,
+                confidence: 0.4,
                 type: 'locality',
                 label: 'Winnetka, Los Angeles, CA, USA',
                 geohash: '9q5dtfc1d',
@@ -113,6 +115,7 @@ describe('geocodejson-googleapis', () => {
                 district: undefined,
                 street: undefined,
               },
+              pluscode: undefined,
             },
             geometry: {
               type: 'Point',
@@ -136,7 +139,7 @@ describe('geocodejson-googleapis', () => {
             bbox: [-4.0796176, 39.8383676, -3.9192423, 39.88605099999999],
             properties: {
               geocoding: {
-                accuracy: 1000,
+                confidence: 0.4,
                 type: 'city',
                 label: 'Toledo, Spain',
                 geohash: 'ezj4u2g3u',
@@ -150,6 +153,7 @@ describe('geocodejson-googleapis', () => {
                 street: undefined,
                 postcode: undefined,
               },
+              pluscode: undefined,
             },
             geometry: {
               type: 'Point',
@@ -173,7 +177,7 @@ describe('geocodejson-googleapis', () => {
             bbox: [-16.3370045, 28.4280248, -16.2356646, 28.487616],
             properties: {
               geocoding: {
-                accuracy: 1000,
+                confidence: 0.4,
                 type: 'city',
                 label: 'Santa Cruz de Tenerife, Spain',
                 geohash: 'eth3yjtu8',
@@ -187,6 +191,7 @@ describe('geocodejson-googleapis', () => {
                 street: undefined,
                 postcode: undefined,
               },
+              pluscode: undefined,
             },
             geometry: {
               type: 'Point',
@@ -221,7 +226,7 @@ describe('geocodejson-googleapis', () => {
             bbox: [24.9332897, 60.16226160000001, 24.9433353, 60.168997],
             properties: {
               geocoding: {
-                accuracy: 100,
+                confidence: 0.5,
                 type: 'street',
                 label: 'Annankatu, 00101 Helsinki, Finland',
                 geohash: 'ud9wr2zeh',
@@ -235,6 +240,7 @@ describe('geocodejson-googleapis', () => {
                 state: undefined,
                 county: undefined,
               },
+              pluscode: undefined,
             },
             geometry: {
               type: 'Point',
@@ -258,7 +264,7 @@ describe('geocodejson-googleapis', () => {
             bbox: [0.5906163, 50.8559061, 0.5957329, 50.8601041],
             properties: {
               geocoding: {
-                accuracy: 1000,
+                confidence: 0.3,
                 type: 'street',
                 label: 'High St, Hastings TN34 3EY, UK',
                 geohash: 'u103m6rrj',
@@ -272,6 +278,7 @@ describe('geocodejson-googleapis', () => {
                 locality: undefined,
                 city: undefined,
               },
+              pluscode: undefined,
             },
             geometry: {
               type: 'Point',

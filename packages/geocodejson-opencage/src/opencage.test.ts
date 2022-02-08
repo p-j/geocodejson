@@ -63,6 +63,7 @@ describe('geocodejson-opencage', () => {
               confidence: 9,
               formatted: 'Place de la République, Rue du Temple, 75003 Paris, France',
               geocoding: {
+                confidence: 0.9,
                 type: 'attraction',
                 label: 'Place de la République, Rue du Temple, 75003 Paris, France',
                 geohash: 'u09wjb16h',
@@ -133,6 +134,7 @@ describe('geocodejson-opencage', () => {
               confidence: 10,
               formatted: '4 Rue du Général Leclerc, 78000 Versailles, France',
               geocoding: {
+                confidence: 1,
                 type: 'building',
                 label: '4 Rue du Général Leclerc, 78000 Versailles, France',
                 geohash: 'u09t87ehn',
@@ -171,6 +173,7 @@ describe('geocodejson-opencage', () => {
             },
             properties: {
               geocoding: {
+                confidence: 0.9,
                 type: 'road',
                 label: 'Chemin de Saint-Maurice-de-Gourdans, 01120 Dagneux, France',
                 geohash: 'u05sgdudnf51f70kh05u',
