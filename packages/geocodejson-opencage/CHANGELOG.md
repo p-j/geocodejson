@@ -1,5 +1,20 @@
 # @p-j/geocodejson-opencage
 
+## 1.2.0
+
+### Minor Changes
+
+- [#82](https://github.com/p-j/geocodejson/pull/82) [`c4c006c`](https://github.com/p-j/geocodejson/commit/c4c006c5d7012406557d21c51be46bab7bfbb039) Thanks [@p-j](https://github.com/p-j)! - # Changelog
+
+  Adding `confidence` as an optional member of the `geocoding` namespace
+
+  - `opencage.parse` return type now provide types for Opencage's specific properties.
+  - the confidence is derived from Opencage's confidence score and mapped to a 0-1 interval.
+
+### Patch Changes
+
+- [#84](https://github.com/p-j/geocodejson/pull/84) [`5c121d6`](https://github.com/p-j/geocodejson/commit/5c121d67d76e885b4bb16200a8a6b633c0c3af22) Thanks [@p-j](https://github.com/p-j)! - Update dependencies
+
 ## 1.1.1
 
 ### Patch Changes

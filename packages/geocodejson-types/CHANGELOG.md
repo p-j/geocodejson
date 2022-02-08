@@ -1,5 +1,13 @@
 # @p-j/geocodejson-types
 
+## 4.1.0
+
+### Minor Changes
+
+- [#82](https://github.com/p-j/geocodejson/pull/82) [`c4c006c`](https://github.com/p-j/geocodejson/commit/c4c006c5d7012406557d21c51be46bab7bfbb039) Thanks [@p-j](https://github.com/p-j)! - # Changelog
+
+  Adding `confidence` as an optional member of the `geocoding` namespace
+
 ## 4.0.1
 
 ### Patch Changes
