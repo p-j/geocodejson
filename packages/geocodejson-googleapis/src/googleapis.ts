@@ -107,7 +107,10 @@ export function parse(
  * Turn a Google Geocode result into a GeocodeJSON result
  * @see https://developers.google.com/maps/documentation/geocoding/overview#GeocodingResponses
  */
-function parseResult(result: GoogleGeocodeResult, { short = false }: { short?: boolean } = {}): GeocodeFeature {
+function parseResult(
+  result: GoogleGeocodeResult,
+  { short = false }: { short?: boolean } = {},
+): GeocodeFeature<{ pluscode?: string }> {
   // Google <-> GeocodeJSON Mapping
   const {
     street_number: housenumber,
@@ -123,8 +126,8 @@ function parseResult(result: GoogleGeocodeResult, { short = false }: { short?: b
 
   const [lng, lat] = parsePointCoordinates(result)
   const properties = {
+    pluscode: result.plus_code?.global_code,
     geocoding: {
-      accuracy: parseAccuracy(result),
       type: parseType(result),
       label: result.formatted_address,
       geohash: geohash.encode(lat, lng),
@@ -137,6 +140,7 @@ function parseResult(result: GoogleGeocodeResult, { short = false }: { short?: b
       county,
       state,
       country,
+      confidence: parseConfidence(result),
     },
   }
 
@@ -220,18 +224,18 @@ function parseType(result: GoogleGeocodeResult): GeocodeType | string {
 /**
  * TODO: do some data analysis... Or get rid of it altogether...
  */
-function parseAccuracy(result: GoogleGeocodeResult): number | undefined {
+function parseConfidence(result: GoogleGeocodeResult): number | undefined {
   // @see https://developers.google.com/maps/documentation/javascript/reference/geocoder#GeocoderResult.partial_match
-  if (result.partial_match) return 1000
+  if (result.partial_match) return 0.3
   switch (result.geometry.location_type) {
     case 'ROOFTOP':
-      return 10
+      return 0.9
     case 'RANGE_INTERPOLATED':
-      return 50
+      return 0.7
     case 'GEOMETRIC_CENTER':
-      return 100
+      return 0.5
     case 'APPROXIMATE':
-      return 1000
+      return 0.4
     default:
       return
   }

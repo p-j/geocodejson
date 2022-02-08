@@ -78,10 +78,15 @@ export function parse(response: BANGeocodeResponse): GeocodeResponse<{}, BANProp
  */
 export function parseResult(result: BANGeocodeResponse['features'][number]): GeocodeFeature<{}, BANProperties> {
   const { properties, ...rest } = result
+
   return {
     ...rest,
     properties: {
-      geocoding: { ...properties, geohash: geohash.encode(rest.geometry.coordinates[1], rest.geometry.coordinates[0]) },
+      geocoding: {
+        ...properties,
+        confidence: properties.score,
+        geohash: geohash.encode(result.geometry.coordinates[1], result.geometry.coordinates[0]),
+      },
     },
   }
 }

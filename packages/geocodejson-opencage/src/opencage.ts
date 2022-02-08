@@ -1,4 +1,3 @@
-import type { Feature, Point } from 'geojson'
 import type { GeocodeOptions, GeocodeFeature, GeocodeResponse } from '@p-j/geocodejson-types'
 import type {
   OpenCageGeocodeRequestParams,
@@ -91,7 +90,7 @@ export function getFetchArgs(params: OpenCageGeocodeRequestParams) {
 /**
  * Convert OpenCage GeoJSON response to a GeocodeJSON one
  */
-export function parse(response: OpenCageGeoJSONResponse): GeocodeResponse {
+export function parse(response: OpenCageGeoJSONResponse): GeocodeResponse<OpenCageGeoJSONFeatureProperties> {
   const { query } = response
   return Object.assign(
     {
@@ -113,27 +112,29 @@ export function parse(response: OpenCageGeoJSONResponse): GeocodeResponse {
  * Convert OpenCage GeoJSON feature to a GeocodeJSON one, returning only the necessary properties
  */
 export function parseResult(
-  result: Feature<Point, OpenCageGeoJSONFeatureProperties>,
+  result: OpenCageGeoJSONResponse['features'][number],
 ): GeocodeFeature<OpenCageGeoJSONFeatureProperties> {
+  const { properties, ...rest } = result
   return {
-    ...result,
+    ...rest,
     properties: {
-      ...result.properties,
+      ...properties,
       geocoding: {
-        type: result.properties?.components?._type ?? 'unknown',
-        label: result.properties?.formatted,
+        type: properties.components?._type ?? 'unknown',
+        label: properties.formatted,
         geohash:
-          result.properties?.annotations?.geohash ??
+          properties.annotations?.geohash ??
           geohash.encode(result.geometry.coordinates[1], result.geometry.coordinates[0]),
-        housenumber: result.properties.components?.house_number ?? result.properties.components?.street_number,
-        street: getFirstMatchingKey(ALIASES['street'], result.properties.components),
-        locality: getFirstMatchingKey(ALIASES['locality'], result.properties.components),
-        postcode: getFirstMatchingKey(ALIASES['postcode'], result.properties.components),
-        city: getFirstMatchingKey(ALIASES['city'], result.properties.components),
-        district: getFirstMatchingKey(ALIASES['district'], result.properties.components),
-        county: getFirstMatchingKey(ALIASES['county'], result.properties.components),
-        state: getFirstMatchingKey(ALIASES['state'], result.properties.components),
-        country: getFirstMatchingKey(ALIASES['country'], result.properties.components),
+        housenumber: properties.components?.house_number ?? properties.components?.street_number,
+        street: getFirstMatchingKey(ALIASES['street'], properties.components),
+        locality: getFirstMatchingKey(ALIASES['locality'], properties.components),
+        postcode: getFirstMatchingKey(ALIASES['postcode'], properties.components),
+        city: getFirstMatchingKey(ALIASES['city'], properties.components),
+        district: getFirstMatchingKey(ALIASES['district'], properties.components),
+        county: getFirstMatchingKey(ALIASES['county'], properties.components),
+        state: getFirstMatchingKey(ALIASES['state'], properties.components),
+        country: getFirstMatchingKey(ALIASES['country'], properties.components),
+        confidence: properties.confidence ? properties.confidence / 10 : undefined,
       },
     },
   }

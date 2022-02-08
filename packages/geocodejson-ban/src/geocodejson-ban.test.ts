@@ -32,6 +32,7 @@ describe('@p-j/geocodejson-ban', () => {
                 citycode: '78646',
                 context: '78, Yvelines, Île-de-France',
                 geohash: 'u09t87em7',
+                confidence: 0.7592313152804641,
                 housenumber: '4',
                 id: '78646_1145_00004',
                 importance: 0.69197,
@@ -70,6 +71,7 @@ describe('@p-j/geocodejson-ban', () => {
             geocoding: {
               city: 'Paris',
               citycode: '75111',
+              confidence: 0.9670254545454545,
               context: '75, Paris, Île-de-France',
               district: 'Paris 11e Arrondissement',
               geohash: 'u09tvzfrp',
@@ -109,6 +111,7 @@ describe('@p-j/geocodejson-ban', () => {
             geocoding: {
               city: 'Paris',
               citycode: '75056',
+              confidence: 0.9704590909090908,
               context: '75, Paris, Île-de-France',
               geohash: 'u09tvqt03',
               id: '75056',
@@ -147,6 +150,7 @@ describe('@p-j/geocodejson-ban', () => {
             geocoding: {
               city: 'La Salle-les-Alpes',
               citycode: '05161',
+              confidence: 0.9387145454545454,
               context: "05, Hautes-Alpes, Provence-Alpes-Côte d'Azur",
               geohash: 'spuxtkvf6',
               id: '05161_B193',
