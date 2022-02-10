@@ -1,5 +1,11 @@
 # @p-j/geocodejson-ban
 
+## 1.3.0
+
+### Minor Changes
+
+- [#85](https://github.com/p-j/geocodejson/pull/85) [`56a3d7d`](https://github.com/p-j/geocodejson/commit/56a3d7d3fbe1735c3f6946fc474f267125aa98bd) Thanks [@p-j](https://github.com/p-j)! - Add `geocoding.country` to BAN's parsed response
+
 ## 1.2.0
 
 ### Minor Changes
