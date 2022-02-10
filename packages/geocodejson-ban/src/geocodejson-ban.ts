@@ -84,6 +84,7 @@ export function parseResult(result: BANGeocodeResponse['features'][number]): Geo
     properties: {
       geocoding: {
         ...properties,
+        country: 'France', // BAN covers France only and this field isn't returned by the original response
         confidence: properties.score,
         geohash: geohash.encode(result.geometry.coordinates[1], result.geometry.coordinates[0]),
       },
