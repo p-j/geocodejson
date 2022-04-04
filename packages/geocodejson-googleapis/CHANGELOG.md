@@ -1,5 +1,11 @@
 # @p-j/geocodejson-googleapis
 
+## 4.0.1
+
+### Patch Changes
+
+- [#87](https://github.com/p-j/geocodejson/pull/87) [`3e5f744`](https://github.com/p-j/geocodejson/commit/3e5f7442c978a4ca643b439f225c6bc48107318b) Thanks [@renovate](https://github.com/apps/renovate)! - Dependencies upgrade
+
 ## 4.0.0
 
 ### Major Changes
