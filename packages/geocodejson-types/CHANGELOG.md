@@ -1,5 +1,11 @@
 # @p-j/geocodejson-types
 
+## 4.1.1
+
+### Patch Changes
+
+- [#95](https://github.com/p-j/geocodejson/pull/95) [`7a499aa`](https://github.com/p-j/geocodejson/commit/7a499aa00a3559a0db28ab056f8de9e0351497e9) Thanks [@p-j](https://github.com/p-j)! - Make `@p-j/geocodejson-types` a dependency.
+
 ## 4.1.0
 
 ### Minor Changes
