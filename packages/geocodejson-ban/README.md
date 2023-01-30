@@ -71,7 +71,7 @@ const rawResponseFromBANApi = await geocode({
 //   limit: 1,
 // }
 
-const geocodeJSONFormatedResults = parse(rawResponseFromOpenCageApis)
+const geocodeJSONFormatedResults = parse(rawResponseFromBANApi)
 // {
 //   type: 'FeatureCollection',
 //   geocoding: {
