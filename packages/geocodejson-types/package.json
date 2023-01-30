@@ -14,7 +14,7 @@
     "geojson": "*"
   },
   "dependencies": {
-    "@types/geojson": "^7946.0.7"
+    "@types/geojson": "^7946.0.10"
   },
   "scripts": {
     "build": "rimraf ./dist && tsc"
