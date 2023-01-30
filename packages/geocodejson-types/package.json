@@ -1,0 +1,22 @@
+{
+  "name": "@p-j/geocodejson-types",
+  "version": "4.1.0",
+  "author": "Jérémie Parker <hi@pkr.sh>",
+  "homepage": "https://github.com/p-j/geocodejson#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/p-j/geocodejson.git"
+  },
+  "main": "",
+  "types": "index",
+  "peerDependencies": {
+    "geojson": "*"
+  },
+  "dependencies": {
+    "@types/geojson": "^7946.0.7"
+  },
+  "scripts": {
+    "build": "rimraf ./dist && tsc"
+  }
+}

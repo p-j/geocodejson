@@ -1,0 +1,35 @@
+name: Build
+
+on:
+  - pull_request
+  - workflow_dispatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - uses: creyD/prettier_action@v4.2
+        with:
+          prettier_options: --write **/*.{ts,js,css,json,md}
+          commit_message: 'style: prettified it for you :zap:'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - run: yarn --pure-lockfile --ignore-engines
+      - run: yarn lint
+      - run: yarn build
+      - run: yarn test
+        env:
+          CI: true
+
+      - uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

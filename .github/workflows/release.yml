@@ -1,0 +1,29 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    # disable release action on forks
+    if: github.repository == 'p-j/geocodejson'
+
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: yarn --pure-lockfile --ignore-engines
+      - uses: changesets/action@v1
+        with:
+          publish: yarn release
+          commit: 'chore(release): publish'
+          title: Publish next versions
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
