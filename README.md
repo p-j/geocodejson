@@ -18,10 +18,10 @@
 | Package                                                                                                       | Version                                                                                                                                         | Changelog                                                                                                                                  |
 | ------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
 | [`@p-j/geocodejson-googleapis`](https://github.com/p-j/geocodejson/tree/main/packages/geocodejson-googleapis) | [![version](https://img.shields.io/npm/v/@p-j/geocodejson-googleapis?style=flat-square)](https://npmjs.com/package/@p-j/geocodejson-googleapis) | [![changelog](https://img.shields.io/badge/changelog-%2B-lightgrey?style=flat-square)](https://changelogs.xyz/@p-j/geocodejson-googleapis) |
-| [`@p-j/geocodejson-here`](#)                                                                                  | _Contribution welcome_                                                                                                                                   |                                                                                                                                   |
+| [`@p-j/geocodejson-here`](#)                                                                                  | _Contribution welcome_                                                                                                                          |                                                                                                                                            |
 | [`@p-j/geocodejson-opencage`](https://github.com/p-j/geocodejson/tree/main/packages/geocodejson-opencage)     | [![version](https://img.shields.io/npm/v/@p-j/geocodejson-opencage?style=flat-square)](https://npmjs.com/package/@p-j/geocodejson-opencage)     | [![changelog](https://img.shields.io/badge/changelog-%2B-lightgrey?style=flat-square)](https://changelogs.xyz/@p-j/geocodejson-opencage)   |
 | [`@p-j/geocodejson-ban`](https://github.com/p-j/geocodejson/tree/main/packages/geocodejson-ban)               | [![version](https://img.shields.io/npm/v/@p-j/geocodejson-ban?style=flat-square)](https://npmjs.com/package/@p-j/geocodejson-ban)               | [![changelog](https://img.shields.io/badge/changelog-%2B-lightgrey?style=flat-square)](https://changelogs.xyz/@p-j/geocodejson-ban)        |
-| [`@p-j/geocodejson-mimirsbrunn`](#)                                                                           | _Contribution welcome_                                                                                                                                   |                                                                                                                                   |
+| [`@p-j/geocodejson-mimirsbrunn`](#)                                                                           | _Contribution welcome_                                                                                                                          |                                                                                                                                            |
 | [`@p-j/geocodejson-types`](https://github.com/p-j/geocodejson/tree/main/packages/geocodejson-types)           | [![version](https://img.shields.io/npm/v/@p-j/geocodejson-types?style=flat-square)](https://npmjs.com/package/@p-j/geocodejson-types)           | [![changelog](https://img.shields.io/badge/changelog-%2B-lightgrey?style=flat-square)](https://changelogs.xyz/@p-j/geocodejson-types)      |
 
 ## Usage
@@ -35,11 +35,9 @@ Refer to each packages README for a list of options linked to the underlying API
 
 ## Roadmap
 
-
-> ⚠️ I'm not currently working on this package so this roadmap is more of a reminder of what would be good to add than a promise of any further development. 
-> 
+> ⚠️ I'm not currently working on this package so this roadmap is more of a reminder of what would be good to add than a promise of any further development.
+>
 > ✨ Contribution are however more than welcome.
-
 
 _aka: TODO_
 
