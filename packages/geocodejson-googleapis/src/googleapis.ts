@@ -1,18 +1,18 @@
-import type { BBox, Position } from 'geojson'
-import type { GeocodeType, GeocodeResponse, GeocodeOptions, GeocodeFeature } from '@p-j/geocodejson-types'
 import type {
+  ApiKeyParams,
+  AddressComponent as GoogleAddressComponent,
   GeocodeRequest as GoogleGeocodeRequest,
   GeocodeResponseData as GoogleGeocodeResponseData,
   GeocodeResult as GoogleGeocodeResult,
-  AddressComponent as GoogleAddressComponent,
-  ApiKeyParams,
 } from '@googlemaps/google-maps-services-js'
-import { featureCollection, point } from '@turf/helpers'
-import fetch from 'cross-fetch'
 import {
   defaultUrl as _googleBaseUrl,
   defaultParamsSerializer as googleParamsSerializer,
 } from '@googlemaps/google-maps-services-js/dist/geocode/geocode'
+import type { GeocodeFeature, GeocodeOptions, GeocodeResponse, GeocodeType } from '@p-j/geocodejson-types'
+import { featureCollection, point } from '@turf/helpers'
+import fetch from 'cross-fetch'
+import type { BBox, Position } from 'geojson'
 import * as geohash from 'ngeohash'
 
 export type GoogleGeocodeRequestParams = Omit<GoogleGeocodeRequest['params'], 'client_id' | 'client_secret'> &
@@ -30,16 +30,16 @@ export const googleBaseUrl = _googleBaseUrl
  * Geocode an address using Google API and the provided options including optional filter used to bias the search.
  *
  * __Common parameter to all geocoder__
- * @param options.apiKey Google API key (takes precedence over `key`)
- * @param options.language Language in which results should preferably be provided (IETF format: es, pt-BR etc...)
- * @param options.address The street address to geocode (avoiding business names, building names etc...)
+ * @param params.apiKey Google API key (takes precedence over `key`)
+ * @param params.language Language in which results should preferably be provided (IETF format: es, pt-BR etc...)
+ * @param params.address The street address to geocode (avoiding business names, building names etc...)
  *
  * __Parameters specific to googleapis__
- * @param options.place_id The place_id that you want to geocode. You can retrieve this information from Places API for example. This replaces `address`
- * @param options.bounds Bounds within which to search
- * @param options.region Country code used to bias the search, specified as a Unicode region subtag / CLDR identifier.
- * @param options.components Components are used to restrict results to a specific area. A filter consists of one or more of: route, locality, administrativeArea, postalCode, country. Only the results that match all the filters will be returned. Filter values support the same methods of spelling correction and partial matching as other geocoding requests @see https://developers.google.com/maps/documentation/javascript/reference/geocoder#GeocoderRequest.componentRestrictions
- * @param options.key Google API key (superseded by apiKey if provided)
+ * @param params.place_id The place_id that you want to geocode. You can retrieve this information from Places API for example. This replaces `address`
+ * @param params.bounds Bounds within which to search
+ * @param params.region Country code used to bias the search, specified as a Unicode region subtag / CLDR identifier.
+ * @param params.components Components are used to restrict results to a specific area. A filter consists of one or more of: route, locality, administrativeArea, postalCode, country. Only the results that match all the filters will be returned. Filter values support the same methods of spelling correction and partial matching as other geocoding requests @see https://developers.google.com/maps/documentation/javascript/reference/geocoder#GeocoderRequest.componentRestrictions
+ * @param params.key Google API key (superseded by apiKey if provided)
  *
  * __For more details on Google's options__
  * @see https://developers.google.com/maps/documentation/geocoding/overview#GeocodingRequests
@@ -61,13 +61,13 @@ export async function geocode({
 
 /**
  * Generate fetch argument to successfully geocode the address using the provided options
- * @param options.language Language in which results should preferably be provided @see https://developers.google.com/maps/faq#languagesupport
- * @param options.address The street address to geocode (avoiding business names, building names etc...)
- * @param options.place_id The place_id that you want to geocode. You can retrieve this information from Places API for example. This replaces `address`
- * @param options.bounds Bounds within which to search.
- * @param options.components Components are used to restrict results to a specific area. A filter consists of one or more of: route, locality, administrativeArea, postalCode, country. Only the results that match all the filters will be returned. Filter values support the same methods of spelling correction and partial matching as other geocoding requests @see https://developers.google.com/maps/documentation/javascript/reference/geocoder#GeocoderRequest.componentRestrictions
- * @param options.region Country code used to bias the search, specified as a Unicode region subtag / CLDR identifier.
- * @param options.key Google API key
+ * @param params.language Language in which results should preferably be provided @see https://developers.google.com/maps/faq#languagesupport
+ * @param params.address The street address to geocode (avoiding business names, building names etc...)
+ * @param params.place_id The place_id that you want to geocode. You can retrieve this information from Places API for example. This replaces `address`
+ * @param params.bounds Bounds within which to search.
+ * @param params.components Components are used to restrict results to a specific area. A filter consists of one or more of: route, locality, administrativeArea, postalCode, country. Only the results that match all the filters will be returned. Filter values support the same methods of spelling correction and partial matching as other geocoding requests @see https://developers.google.com/maps/documentation/javascript/reference/geocoder#GeocoderRequest.componentRestrictions
+ * @param params.region Country code used to bias the search, specified as a Unicode region subtag / CLDR identifier.
+ * @param params.key Google API key
  * @see https://developers.google.com/maps/documentation/geocoding/overview#GeocodingRequests
  * @see https://developers.google.com/maps/documentation/javascript/reference/geocoder#GeocoderRequest
  */

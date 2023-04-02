@@ -1,6 +1,6 @@
-import type { OpenCageGeocodeRequestParams } from './opencage.types'
-import { parse, geocode, opencageBaseUrl, getFetchArgs } from './opencage'
 import * as fixtures from './__fixtures__/opencage'
+import { geocode, getFetchArgs, opencageBaseUrl, parse } from './opencage'
+import type { OpenCageGeocodeRequestParams } from './opencage.types'
 
 // const jsonLog = (obj: Object, name?: string) => console.log(name, JSON.stringify(obj, null, 2))
 
@@ -370,6 +370,6 @@ describe('geocodejson-opencage', () => {
   })
 
   describe('geocode', () => {
-    // TODO: add tests with mocked response
+    // TODO: add tests with mocked responses
   })
 })

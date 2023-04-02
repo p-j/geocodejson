@@ -1,12 +1,12 @@
-import type { GeocodeOptions, GeocodeFeature, GeocodeResponse } from '@p-j/geocodejson-types'
-import type {
-  OpenCageGeocodeRequestParams,
-  OpenCageGeoJSONResponse,
-  OpenCageGeoJSONFeatureProperties,
-} from './opencage.types'
+import type { GeocodeFeature, GeocodeOptions, GeocodeResponse } from '@p-j/geocodejson-types'
+import { featureCollection } from '@turf/helpers'
 import fetch from 'cross-fetch'
 import * as geohash from 'ngeohash'
-import { featureCollection } from '@turf/helpers'
+import type {
+  OpenCageGeoJSONFeatureProperties,
+  OpenCageGeoJSONResponse,
+  OpenCageGeocodeRequestParams,
+} from './opencage.types'
 
 export const opencageBaseUrl = 'https://api.opencagedata.com/geocode/v1/geojson'
 
@@ -18,28 +18,28 @@ export type GeocodeParams = ({ apiKey: string; key?: string } | { apiKey?: strin
  * Geocode an address using OpenCage Forward Geocoding GeoJSON API
  *
  * __Common parameter to all geocoder__
- * @param options.apiKey Opencage API key (takes precedence over `key`)
- * @param options.language Language in which results should preferably be provided (IETF format: es, pt-BR etc...)
- * @param options.address The street address to geocode (avoiding business names, building names etc...)
+ * @param params.apiKey Opencage API key (takes precedence over `key`)
+ * @param params.language Language in which results should preferably be provided (IETF format: es, pt-BR etc...)
+ * @param params.address The street address to geocode (avoiding business names, building names etc...)
  *
  * __Parameters specific to OpenCage__
- * @param options.key a 30 character long, alphanumeric string.	Used if apiKey is not provided.
- * @param options.q the query string to be geocoded: a latitude, longitude or a placename/address. This is superseded by options.address.
- * @param options.abbrv When set to 1 we attempt to abbreviate and shorten the formatted string we return. Learn more about formatted placenames.
- * @param options.add_request When set to 1 the various request parameters are added to the response for ease of debugging.
- * @param options.bounds Used only for forward geocoding. This value will restrict the possible results to a defined bounding box.
+ * @param params.key a 30 character long, alphanumeric string.	Used if apiKey is not provided.
+ * @param params.q the query string to be geocoded: a latitude, longitude or a placename/address. This is superseded by params.address.
+ * @param params.abbrv When set to 1 we attempt to abbreviate and shorten the formatted string we return. Learn more about formatted placenames.
+ * @param params.add_request When set to 1 the various request parameters are added to the response for ease of debugging.
+ * @param params.bounds Used only for forward geocoding. This value will restrict the possible results to a defined bounding box.
  *                       The value of the bounds parameter should be specified as two coordinate points forming the south-west and north-east corners of a bounding box (min lon, min lat, max lon, max lat).
- * @param options.countrycode ISO 3166-1 Alpha 2 Used only for forward geocoding. Restricts results to the specified country/territory or countries. You can specify multiple country codes by supplying a comma separated list.
- * @param options.jsonp Wraps the returned JSON with a function name.
- * @param options.limit The maximum number of results we should return. Default is 10. Maximum allowable value is 100.
- * @param options.min_confidence An integer from 1-10. Only results with at least this confidence will be returned. Learn more about our confidence score on API documentation.
- * @param options.no_annotations When set to 1 results will not contain annotations.
- * @param options.no_dedupe When set to 1 results will not be deduplicated.
- * @param options.no_record When set to 1 the query contents are not logged. Please use this parameter if you have concerns about privacy and want us to have no record of your query.
- * @param options.pretty When set to 1 results are 'pretty' printed for easier reading. Useful for debugging.
- * @param options.proximity Used only for forward geocoding. Provides the geocoder with a hint to bias results in favour of those closer to the specified location. Please note though, this is just one of many factors in the internal scoring we use for ranking results.
+ * @param params.countrycode ISO 3166-1 Alpha 2 Used only for forward geocoding. Restricts results to the specified country/territory or countries. You can specify multiple country codes by supplying a comma separated list.
+ * @param params.jsonp Wraps the returned JSON with a function name.
+ * @param params.limit The maximum number of results we should return. Default is 10. Maximum allowable value is 100.
+ * @param params.min_confidence An integer from 1-10. Only results with at least this confidence will be returned. Learn more about our confidence score on API documentation.
+ * @param params.no_annotations When set to 1 results will not contain annotations.
+ * @param params.no_dedupe When set to 1 results will not be deduplicated.
+ * @param params.no_record When set to 1 the query contents are not logged. Please use this parameter if you have concerns about privacy and want us to have no record of your query.
+ * @param params.pretty When set to 1 results are 'pretty' printed for easier reading. Useful for debugging.
+ * @param params.proximity Used only for forward geocoding. Provides the geocoder with a hint to bias results in favour of those closer to the specified location. Please note though, this is just one of many factors in the internal scoring we use for ranking results.
  *                          The value is a point with latitude, longitude coordinates in decimal format.
- * @param options.roadinfo When set to 1 the behaviour of the geocoder is changed to attempt to match the nearest road (as opposed to address). If possible we also fill additional information in the roadinfo annotation. Please see details API Documentation.
+ * @param params.roadinfo When set to 1 the behaviour of the geocoder is changed to attempt to match the nearest road (as opposed to address). If possible we also fill additional information in the roadinfo annotation. Please see details API Documentation.
  * @see https://opencagedata.com/api#forward
  */
 export async function geocode(params: GeocodeParams): Promise<OpenCageGeoJSONResponse> {
@@ -55,23 +55,23 @@ export async function geocode(params: GeocodeParams): Promise<OpenCageGeoJSONRes
 
 /**
  * Generate fetch argument to successfully geocode the address using the provided options
- * @param options.q the query string to be geocoded: a latitude, longitude or a placename/address. This is superseded by options.address.
- * @param options.abbrv When set to 1 we attempt to abbreviate and shorten the formatted string we return. Learn more about formatted placenames.
- * @param options.add_request When set to 1 the various request parameters are added to the response for ease of debugging.
- * @param options.bounds Used only for forward geocoding. This value will restrict the possible results to a defined bounding box.
+ * @param params.q the query string to be geocoded: a latitude, longitude or a placename/address. This is superseded by params.address.
+ * @param params.abbrv When set to 1 we attempt to abbreviate and shorten the formatted string we return. Learn more about formatted placenames.
+ * @param params.add_request When set to 1 the various request parameters are added to the response for ease of debugging.
+ * @param params.bounds Used only for forward geocoding. This value will restrict the possible results to a defined bounding box.
  *                       The value of the bounds parameter should be specified as two coordinate points forming the south-west and north-east corners of a bounding box (min lon, min lat, max lon, max lat).
- * @param options.countrycode ISO 3166-1 Alpha 2 Used only for forward geocoding. Restricts results to the specified country/territory or countries. You can specify multiple country codes by supplying a comma separated list.
- * @param options.jsonp Wraps the returned JSON with a function name.
- * @param options.language An IETF format language code (such as es for Spanish or pt-BR for Brazilian Portuguese), or native in which case OpenCage will attempt to return the response in the local language(s).
- * @param options.limit The maximum number of results we should return. Default is 10. Maximum allowable value is 100.
- * @param options.min_confidence An integer from 1-10. Only results with at least this confidence will be returned. Learn more about our confidence score on API documentation.
- * @param options.no_annotations When set to 1 results will not contain annotations.
- * @param options.no_dedupe When set to 1 results will not be deduplicated.
- * @param options.no_record When set to 1 the query contents are not logged. Please use this parameter if you have concerns about privacy and want us to have no record of your query.
- * @param options.pretty When set to 1 results are 'pretty' printed for easier reading. Useful for debugging.
- * @param options.proximity Used only for forward geocoding. Provides the geocoder with a hint to bias results in favour of those closer to the specified location. Please note though, this is just one of many factors in the internal scoring we use for ranking results.
+ * @param params.countrycode ISO 3166-1 Alpha 2 Used only for forward geocoding. Restricts results to the specified country/territory or countries. You can specify multiple country codes by supplying a comma separated list.
+ * @param params.jsonp Wraps the returned JSON with a function name.
+ * @param params.language An IETF format language code (such as es for Spanish or pt-BR for Brazilian Portuguese), or native in which case OpenCage will attempt to return the response in the local language(s).
+ * @param params.limit The maximum number of results we should return. Default is 10. Maximum allowable value is 100.
+ * @param params.min_confidence An integer from 1-10. Only results with at least this confidence will be returned. Learn more about our confidence score on API documentation.
+ * @param params.no_annotations When set to 1 results will not contain annotations.
+ * @param params.no_dedupe When set to 1 results will not be deduplicated.
+ * @param params.no_record When set to 1 the query contents are not logged. Please use this parameter if you have concerns about privacy and want us to have no record of your query.
+ * @param params.pretty When set to 1 results are 'pretty' printed for easier reading. Useful for debugging.
+ * @param params.proximity Used only for forward geocoding. Provides the geocoder with a hint to bias results in favour of those closer to the specified location. Please note though, this is just one of many factors in the internal scoring we use for ranking results.
  *                          The value is a point with latitude, longitude coordinates in decimal format.
- * @param options.roadinfo When set to 1 the behaviour of the geocoder is changed to attempt to match the nearest road (as opposed to address). If possible we also fill additional information in the roadinfo annotation. Please see details API Documentation.
+ * @param params.roadinfo When set to 1 the behaviour of the geocoder is changed to attempt to match the nearest road (as opposed to address). If possible we also fill additional information in the roadinfo annotation. Please see details API Documentation.
  * @see https://opencagedata.com/api#forward
  */
 export function getFetchArgs(params: OpenCageGeocodeRequestParams) {
