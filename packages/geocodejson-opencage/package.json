@@ -21,12 +21,12 @@
   "dependencies": {
     "@p-j/geocodejson-types": "4.1.1",
     "@turf/helpers": "^6.4.0",
-    "cross-fetch": "^3.1.5",
+    "cross-fetch": "^4.0.0",
     "geojson": "^0.5.0",
     "ngeohash": "^0.6.3"
   },
   "devDependencies": {
-    "@types/jest": "29.5.2",
+    "@types/jest": "29.5.4",
     "@types/ngeohash": "0.6.4"
   }
 }
