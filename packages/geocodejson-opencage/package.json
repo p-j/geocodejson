@@ -1,6 +1,6 @@
 {
   "name": "@p-j/geocodejson-opencage",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "GeocodeJSON adapter for OpenCage Geocoding API",
   "author": "Jérémie Parker <hi@pkr.sh>",
   "homepage": "https://github.com/p-j/geocodejson#readme",
@@ -19,7 +19,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@p-j/geocodejson-types": "4.1.1",
+    "@p-j/geocodejson-types": "4.1.2",
     "@turf/helpers": "^6.4.0",
     "cross-fetch": "^4.0.0",
     "geojson": "^0.5.0",
