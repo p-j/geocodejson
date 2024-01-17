@@ -11,6 +11,6 @@
     "strictFunctionTypes": true,
     "preserveConstEnums": true,
     "noEmit": true,
-    "forceConsistentCasingInFileNames": true
-  }
+    "forceConsistentCasingInFileNames": true,
+  },
 }
