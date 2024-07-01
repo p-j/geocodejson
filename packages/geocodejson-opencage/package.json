@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@p-j/geocodejson-types": "4.1.2",
-    "@turf/helpers": "^6.4.0",
+    "@turf/helpers": "^7.0.0",
     "cross-fetch": "^4.0.0",
     "geojson": "^0.5.0",
     "ngeohash": "^0.6.3"
