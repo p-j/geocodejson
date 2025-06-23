@@ -40,7 +40,6 @@
 ### Patch Changes
 
 - [#58](https://github.com/p-j/geocodejson/pull/58) [`7c8d0a7`](https://github.com/p-j/geocodejson/commit/7c8d0a799d6b7de4bbacbf0d073aa04df840e9ac) Thanks [@p-j](https://github.com/p-j)! - Googleapis Provider v3
-
   - use official types & serializer
   - handle all native options
   - upgrade to @p-j/geocodejson-types v3
@@ -51,7 +50,6 @@
 ### Major Changes
 
 - [#60](https://github.com/p-j/geocodejson/pull/60) [`1737aca`](https://github.com/p-j/geocodejson/commit/1737acad66a30946e9476b6522a78fc1f1579d5f) Thanks [@p-j](https://github.com/p-j)! - Update Shared Types
-
   - make all GeocodeOptions members optional
   - better follow the geocodejson spec by allowing multiple licence & attribution
 
