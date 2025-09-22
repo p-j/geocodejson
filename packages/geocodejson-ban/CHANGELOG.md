@@ -1,5 +1,14 @@
 # @p-j/geocodejson-ban
 
+## 1.3.4
+
+### Patch Changes
+
+- [`9a7a413`](https://github.com/p-j/geocodejson/commit/9a7a4139459aa7ff092a965b4ded115ceabd33d6) Thanks [@p-j](https://github.com/p-j)! - Depencies upgrade
+
+- Updated dependencies [[`9a7a413`](https://github.com/p-j/geocodejson/commit/9a7a4139459aa7ff092a965b4ded115ceabd33d6)]:
+  - @p-j/geocodejson-types@4.1.3
+
 ## 1.3.3
 
 ### Patch Changes
