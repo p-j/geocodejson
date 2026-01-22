@@ -1,7 +1,10 @@
 {
   "extends": "../../tsconfig",
   "compilerOptions": {
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "types": ["node"],
+    "lib": ["ES2020"],
+    "skipLibCheck": true
   },
   "include": ["./src"]
 }

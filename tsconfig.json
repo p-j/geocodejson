@@ -5,6 +5,7 @@
     "target": "esnext",
     "module": "commonjs",
     "lib": ["ESNext"],
+    "types": [],
     "moduleResolution": "node",
     "alwaysStrict": true,
     "noImplicitAny": true,
