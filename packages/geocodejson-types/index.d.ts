@@ -16,6 +16,7 @@ export interface GeocodeOptions {
 /**
  * GeocodeJSON Response interface
  */
+// prettier-ignore
 export interface GeocodeResponse<P = GeoJsonProperties, G = JSONObject>
   extends FeatureCollection<GeocodeFeature<P, G>['geometry'], GeocodeFeature<P, G>['properties']> {
   // REQUIRED. Namespace.
