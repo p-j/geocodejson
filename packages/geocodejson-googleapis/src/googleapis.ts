@@ -151,10 +151,13 @@ function parseResult(
  * Parses Address Component into a single layer Object
  */
 function parseAddressComponents(components: GoogleAddressComponent[], { short = false }: { short?: boolean } = {}) {
-  return components.reduce((acc, component) => {
-    acc[component.types[0]] = short ? component.short_name : component.long_name
-    return acc
-  }, {} as Record<string, string>)
+  return components.reduce(
+    (acc, component) => {
+      acc[component.types[0]] = short ? component.short_name : component.long_name
+      return acc
+    },
+    {} as Record<string, string>,
+  )
 }
 
 /**
