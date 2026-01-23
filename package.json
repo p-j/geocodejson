@@ -10,6 +10,7 @@
     "@changesets/changelog-github": "0.5.1",
     "@changesets/cli": "2.29.7",
     "@types/jest": "30.0.0",
+    "@types/node": "22.13.14",
     "jest": "30.2.0",
     "lerna": "9.0.0",
     "prettier": "3.6.2",
@@ -26,7 +27,8 @@
     "format": "prettier --write '**/*.{ts,js,css,json,md}'",
     "lerna": "lerna",
     "release": "yarn build && changeset publish",
-    "test": "lerna run test -- --passWithNoTests --ci --coverage"
+    "test": "lerna run test -- --passWithNoTests --ci --coverage",
+    "clean": "lerna run clean && rimraf node_modules"
   },
   "version": "0.0.0",
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"

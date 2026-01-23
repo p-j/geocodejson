@@ -28,6 +28,7 @@
   },
   "scripts": {
     "build": "rimraf ./dist && tsc -b ./tsconfig.build.json",
-    "test": "jest"
+    "test": "jest",
+    "clean": "rimraf ./dist"
   }
 }

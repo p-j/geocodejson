@@ -17,6 +17,7 @@
     "@types/geojson": "^7946.0.10"
   },
   "scripts": {
-    "build": "rimraf ./dist && tsc"
+    "build": "rimraf ./dist && tsc",
+    "clean": "rimraf ./dist"
   }
 }
