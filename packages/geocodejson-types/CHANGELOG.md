@@ -1,5 +1,11 @@
 # @p-j/geocodejson-types
 
+## 5.0.0
+
+### Major Changes
+
+- [#110](https://github.com/p-j/geocodejson/pull/110) [`b96ca45`](https://github.com/p-j/geocodejson/commit/b96ca450903dcd15dd04c16f336d3df56812bd3f) Thanks [@renovate](https://github.com/apps/renovate)! - Dependencies Upgrade
+
 ## 4.1.3
 
 ### Patch Changes

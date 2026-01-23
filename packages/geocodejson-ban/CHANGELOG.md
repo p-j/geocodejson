@@ -1,5 +1,16 @@
 # @p-j/geocodejson-ban
 
+## 2.0.0
+
+### Major Changes
+
+- [#110](https://github.com/p-j/geocodejson/pull/110) [`b96ca45`](https://github.com/p-j/geocodejson/commit/b96ca450903dcd15dd04c16f336d3df56812bd3f) Thanks [@renovate](https://github.com/apps/renovate)! - Dependencies Upgrade
+
+### Patch Changes
+
+- Updated dependencies [[`b96ca45`](https://github.com/p-j/geocodejson/commit/b96ca450903dcd15dd04c16f336d3df56812bd3f)]:
+  - @p-j/geocodejson-types@5.0.0
+
 ## 1.3.4
 
 ### Patch Changes
