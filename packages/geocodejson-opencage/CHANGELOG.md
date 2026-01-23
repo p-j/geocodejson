@@ -1,5 +1,14 @@
 # @p-j/geocodejson-opencage
 
+## 2.0.1
+
+### Patch Changes
+
+- [#112](https://github.com/p-j/geocodejson/pull/112) [`1101a7f`](https://github.com/p-j/geocodejson/commit/1101a7fd0db00946d66f86a9e428caa2c0fbf4b9) Thanks [@p-j](https://github.com/p-j)! - Upgrade all dependencies
+
+- Updated dependencies [[`1101a7f`](https://github.com/p-j/geocodejson/commit/1101a7fd0db00946d66f86a9e428caa2c0fbf4b9)]:
+  - @p-j/geocodejson-types@5.0.1
+
 ## 2.0.0
 
 ### Major Changes
