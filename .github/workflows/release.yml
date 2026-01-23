@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
+
 jobs:
   release:
     # disable release action on forks
@@ -22,8 +26,7 @@ jobs:
       - uses: changesets/action@v1
         with:
           publish: yarn release
-          commit: 'chore(release): publish'
+          commit: "chore(release): publish"
           title: Publish next versions
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
