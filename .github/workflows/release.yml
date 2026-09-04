@@ -17,15 +17,15 @@ jobs:
 
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
-      - uses: actions/setup-node@v5
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
           registry-url: https://registry.npmjs.org
       - run: yarn --pure-lockfile --ignore-engines
-      - uses: changesets/action@v1
+      - uses: changesets/action@v2.1.1
         with:
           publish: yarn release
           commit: "chore(release): publish"
